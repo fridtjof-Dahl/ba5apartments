@@ -1,0 +1,142 @@
+'use client'
+
+import { useRef } from 'react'
+import { motion, useScroll, useTransform, useInView } from 'framer-motion'
+import { MapPin, Users, Maximize, ArrowRight } from 'lucide-react'
+import { apartments } from '@/data/apartments'
+
+function ApartmentCard({ apartment, index }: { apartment: typeof apartments[0]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: '-20%' })
+  const isEven = index % 2 === 0
+
+  return (
+    <motion.div
+      ref={ref}
+      className="min-h-screen flex items-center py-20"
+    >
+      <div className={`max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center ${
+        isEven ? '' : 'lg:[direction:rtl]'
+      }`}>
+        <motion.div
+          initial={{ opacity: 0, x: isEven ? -60 : 60 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0, 1] }}
+          className="relative aspect-[4/3] lg:aspect-[3/4] rounded-2xl overflow-hidden group lg:[direction:ltr]"
+        >
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+            style={{ backgroundImage: `url('${apartment.image}')` }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-midnight/80 via-transparent to-transparent" />
+
+          <div className="absolute top-6 left-6 flex gap-2">
+            <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-xs font-medium tracking-wide">
+              {apartment.area}
+            </span>
+          </div>
+
+          <div className="absolute bottom-6 left-6 right-6">
+            <div className="flex gap-4 text-sm text-white/70">
+              <span className="flex items-center gap-1.5">
+                <Maximize size={14} />
+                {apartment.size}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Users size={14} />
+                {apartment.guests} guests
+              </span>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: isEven ? 60 : -60 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0, 1] }}
+          className="lg:[direction:ltr]"
+        >
+          <div className="flex items-center gap-2 text-gold text-sm tracking-[0.2em] uppercase font-medium mb-4">
+            <MapPin size={14} />
+            {apartment.location}
+          </div>
+
+          <h3 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight mb-6">
+            {apartment.name}
+          </h3>
+
+          <p className="text-white/50 leading-relaxed text-base md:text-lg mb-8">
+            {apartment.description}
+          </p>
+
+          <div className="flex flex-wrap gap-2 mb-10">
+            {apartment.features.map((feature) => (
+              <span
+                key={feature}
+                className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-gold/30 hover:text-gold transition-all duration-300"
+              >
+                {feature}
+              </span>
+            ))}
+          </div>
+
+          <a href="#booking" className="btn-primary group/btn">
+            Book This Apartment
+            <ArrowRight size={16} className="transition-transform duration-300 group-hover/btn:translate-x-1" />
+          </a>
+        </motion.div>
+      </div>
+    </motion.div>
+  )
+}
+
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll()
+  const scaleX = useTransform(scrollYProgress, [0.15, 0.65], [0, 1])
+
+  return (
+    <div className="fixed left-0 right-0 top-0 h-[2px] z-50 bg-white/5">
+      <motion.div
+        style={{ scaleX, transformOrigin: '0%' }}
+        className="h-full bg-gradient-to-r from-gold-dark via-gold to-gold-light"
+      />
+    </div>
+  )
+}
+
+export default function ApartmentShowcase() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const isHeaderInView = useInView(headerRef, { once: true, margin: '-100px' })
+
+  return (
+    <section id="apartments" ref={sectionRef} className="relative">
+      <ScrollProgress />
+
+      <div className="section-padding pb-0">
+        <motion.div
+          ref={headerRef}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="max-w-7xl mx-auto text-center mb-10"
+        >
+          <span className="text-gold text-sm tracking-[0.25em] uppercase font-medium">
+            Our Collection
+          </span>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold mt-4 leading-tight">
+            Handpicked <span className="italic text-gradient-gold font-medium">Apartments</span>
+          </h2>
+          <p className="mt-6 text-white/50 max-w-2xl mx-auto text-lg leading-relaxed">
+            Each apartment is carefully selected and furnished to provide an exceptional living experience
+            in Oslo&apos;s most desirable neighborhoods.
+          </p>
+        </motion.div>
+      </div>
+
+      {apartments.map((apartment, index) => (
+        <ApartmentCard key={apartment.id} apartment={apartment} index={index} />
+      ))}
+    </section>
+  )
+}
