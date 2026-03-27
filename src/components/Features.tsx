@@ -2,80 +2,81 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { MapPin, Sofa, CalendarDays, Wifi, Shield, Compass } from 'lucide-react'
+import { Shield, Home, Coffee, Wifi, Clock, Heart } from 'lucide-react'
 
 const features = [
   {
-    icon: MapPin,
-    title: 'Prime Location',
-    description: 'Strategically situated in central Oslo with easy access to key attractions, business districts, and public transportation.',
+    icon: Shield,
+    title: 'Trygt & sikkert',
+    description: 'Sikker adgang, forsikring og et dedikert team som sørger for din trygghet.',
   },
   {
-    icon: Sofa,
-    title: 'Fully Furnished',
-    description: 'Tastefully furnished with all essentials — from cozy bedrooms to well-appointed kitchens, designed for comfort.',
+    icon: Home,
+    title: 'Fullt møblert',
+    description: 'Alt du trenger for å føle deg hjemme — fra sengetøy til fullt utstyrt kjøkken.',
   },
   {
-    icon: CalendarDays,
-    title: 'Flexible Stays',
-    description: 'Short vacation or extended business trip — choose the duration that suits you best with our flexible options.',
+    icon: Coffee,
+    title: 'Hjemmekoselig',
+    description: 'Gjennomtenkte detaljer som gjør at du virkelig kan slappe av og lande.',
   },
   {
     icon: Wifi,
-    title: 'Modern Amenities',
-    description: 'High-speed WiFi, flat-screen TVs, fully equipped kitchens, and everything you need for a seamless experience.',
+    title: 'Alt inkludert',
+    description: 'WiFi, strøm, rengjøring og alt det praktiske er tatt hånd om for deg.',
   },
   {
-    icon: Shield,
-    title: 'Security & Privacy',
-    description: 'Secure building access and a dedicated management team ensuring your safety and peace of mind.',
+    icon: Clock,
+    title: 'Fleksible opphold',
+    description: 'Kort ferie eller lengre opphold — vi tilpasser oss dine behov.',
   },
   {
-    icon: Compass,
-    title: 'Local Expertise',
-    description: 'Personalized recommendations from our staff — discover hidden gems, eateries, and cultural attractions.',
+    icon: Heart,
+    title: 'Personlig service',
+    description: 'Lokale tips, rask respons og en vert som genuint bryr seg om oppholdet ditt.',
   },
 ]
 
 export default function Features() {
   const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="features" className="section-padding bg-grain relative">
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section id="welcome" className="section-padding">
+      <div className="max-w-5xl mx-auto">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
-          <span className="text-gold text-sm tracking-[0.25em] uppercase font-medium">
-            Why Choose Us
-          </span>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold mt-4 leading-tight">
-            Living, <span className="italic text-gradient-gold font-medium">Redefined</span>
+          <p className="text-brass text-sm tracking-[0.2em] uppercase font-medium mb-4">
+            Hvorfor BA5
+          </p>
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-stone leading-tight">
+            Mer enn et sted å bo
           </h2>
-          <p className="mt-6 text-white/50 max-w-2xl mx-auto text-lg leading-relaxed">
-            We go beyond accommodation. Every detail is curated to make your Oslo experience exceptional.
+          <p className="mt-5 text-text-muted max-w-lg mx-auto leading-relaxed">
+            Vi skaper opplevelser der du føler deg like hjemme som i din egen stue —
+            med tryggheten og komforten du fortjener.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
           {features.map((feature, i) => (
             <motion.div
               key={feature.title}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="glass-card rounded-2xl p-8 hover:border-gold/20 transition-all duration-500 group"
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="text-center"
             >
-              <div className="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-6 group-hover:bg-gold/20 transition-colors duration-500">
-                <feature.icon size={22} className="text-gold" />
+              <div className="w-11 h-11 mx-auto rounded-full bg-stone/5 flex items-center justify-center mb-4">
+                <feature.icon size={20} className="text-brass" strokeWidth={1.5} />
               </div>
-              <h3 className="font-display text-xl font-semibold mb-3">{feature.title}</h3>
-              <p className="text-white/50 leading-relaxed text-sm">{feature.description}</p>
+              <h3 className="font-display text-lg font-medium text-stone mb-2">{feature.title}</h3>
+              <p className="text-text-muted text-sm leading-relaxed">{feature.description}</p>
             </motion.div>
           ))}
         </div>

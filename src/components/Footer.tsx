@@ -1,79 +1,42 @@
 'use client'
 
-import { useState } from 'react'
-import { ArrowRight } from 'lucide-react'
-
 const footerLinks = {
-  company: [
-    { label: 'About Us', href: '#features' },
-    { label: 'Our Apartments', href: '#apartments' },
-    { label: 'Neighborhoods', href: '#neighborhoods' },
-    { label: 'Activities', href: '#activities' },
+  selskap: [
+    { label: 'Om oss', href: '#welcome' },
+    { label: 'Leiligheter', href: '#apartments' },
+    { label: 'Nabolag', href: '#neighborhoods' },
+    { label: 'Opplevelser', href: '#activities' },
   ],
-  services: [
-    { label: 'Book a Room', href: '#booking' },
-    { label: 'Company Agreements', href: '#business' },
-    { label: 'Rent Out Your Place', href: '#rent-out' },
-    { label: 'Contact Us', href: '#contact' },
-  ],
-  legal: [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Cookie Policy', href: '#' },
+  tjenester: [
+    { label: 'Book leilighet', href: '#booking' },
+    { label: 'Bedriftsavtaler', href: '#business' },
+    { label: 'Lei ut bolig', href: '#rent-out' },
+    { label: 'Kontakt', href: '#contact' },
   ],
 }
 
 export default function Footer() {
-  const [email, setEmail] = useState('')
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault()
-    alert('Thank you for subscribing!')
-    setEmail('')
-  }
-
   return (
-    <footer className="relative border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-6 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
-          <div className="lg:col-span-2">
-            <div className="mb-6">
-              <span className="font-display text-2xl font-semibold tracking-wide">
-                BA<span className="text-gradient-gold">5</span>
-              </span>
-              <span className="block text-[10px] tracking-[0.3em] uppercase text-slate-custom font-medium -mt-1">
-                Apartments
-              </span>
-            </div>
-            <p className="text-white/40 text-sm leading-relaxed max-w-sm mb-8">
-              Premium, fully furnished apartments in Oslo&apos;s most sought-after neighborhoods.
-              Your home away from home, designed for comfort and convenience.
+    <footer className="bg-stone text-white">
+      <div className="max-w-5xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+          <div>
+            <span className="font-display text-xl font-semibold tracking-wide">
+              BA<span className="text-brass-light">5</span>
+            </span>
+            <span className="block text-[9px] tracking-[0.3em] uppercase text-white/40 font-medium -mt-0.5 mb-4">
+              Apartments
+            </span>
+            <p className="text-white/40 text-sm leading-relaxed max-w-xs">
+              Premium møblerte leiligheter i Oslos fineste nabolag.
+              Ditt hjem borte fra hjemmet.
             </p>
-
-            <form onSubmit={handleSubscribe} className="flex gap-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="flex-grow px-4 py-3 bg-white/5 border border-white/10 text-white text-sm focus:border-gold/50 focus:outline-none transition-colors"
-              />
-              <button
-                type="submit"
-                className="px-5 py-3 bg-gold text-midnight hover:bg-gold-light transition-all duration-300 shrink-0"
-                aria-label="Subscribe"
-              >
-                <ArrowRight size={16} />
-              </button>
-            </form>
-            <p className="text-white/20 text-xs mt-3">Subscribe to our newsletter for exclusive offers</p>
           </div>
 
           <div>
-            <h3 className="font-semibold text-sm tracking-wide mb-6">Company</h3>
+            <h3 className="text-sm font-medium tracking-wide mb-5 text-white/60 uppercase text-[13px]">Selskap</h3>
             <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
+              {footerLinks.selskap.map((link) => (
                 <li key={link.label}>
                   <a href={link.href} className="text-white/40 hover:text-white text-sm transition-colors duration-300">
                     {link.label}
@@ -84,22 +47,9 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold text-sm tracking-wide mb-6">Services</h3>
+            <h3 className="text-sm font-medium tracking-wide mb-5 text-white/60 uppercase text-[13px]">Tjenester</h3>
             <ul className="space-y-3">
-              {footerLinks.services.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-white/40 hover:text-white text-sm transition-colors duration-300">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-semibold text-sm tracking-wide mb-6">Legal</h3>
-            <ul className="space-y-3">
-              {footerLinks.legal.map((link) => (
+              {footerLinks.tjenester.map((link) => (
                 <li key={link.label}>
                   <a href={link.href} className="text-white/40 hover:text-white text-sm transition-colors duration-300">
                     {link.label}
@@ -110,13 +60,14 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-white/20 text-sm">
-            &copy; {new Date().getFullYear()} BA5 Apartments. All rights reserved.
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-3">
+          <p className="text-white/25 text-xs">
+            &copy; {new Date().getFullYear()} BA5 Apartments. Alle rettigheter reservert.
           </p>
-          <p className="text-white/20 text-xs">
-            Oslo, Norway
-          </p>
+          <div className="flex gap-4">
+            <a href="#" className="text-white/25 hover:text-white/50 text-xs transition-colors">Personvern</a>
+            <a href="#" className="text-white/25 hover:text-white/50 text-xs transition-colors">Vilkår</a>
+          </div>
         </div>
       </div>
     </footer>

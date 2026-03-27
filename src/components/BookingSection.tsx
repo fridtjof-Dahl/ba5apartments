@@ -2,88 +2,83 @@
 
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Calendar, Users, Home, ArrowRight } from 'lucide-react'
+import { Calendar, Users, ArrowRight } from 'lucide-react'
 import { apartments } from '@/data/apartments'
 
 export default function BookingSection() {
   const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
   const [checkIn, setCheckIn] = useState('')
   const [checkOut, setCheckOut] = useState('')
   const [guests, setGuests] = useState('2')
-  const [selectedApartment, setSelectedApartment] = useState('')
+  const [apartment, setApartment] = useState('')
 
   return (
-    <section id="booking" className="section-padding relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-midnight-light via-midnight to-midnight-light" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gold/5 rounded-full blur-[120px]" />
-
-      <div className="max-w-5xl mx-auto relative z-10">
+    <section id="booking" className="section-padding bg-stone">
+      <div className="max-w-4xl mx-auto">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
         >
-          <span className="text-gold text-sm tracking-[0.25em] uppercase font-medium">
-            Reserve Your Stay
-          </span>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold mt-4 leading-tight">
-            Book <span className="italic text-gradient-gold font-medium">Your Apartment</span>
+          <p className="text-brass-light text-sm tracking-[0.2em] uppercase font-medium mb-4">
+            Reserver ditt opphold
+          </p>
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-white leading-tight">
+            Book din leilighet
           </h2>
-          <p className="mt-6 text-white/50 max-w-xl mx-auto text-lg leading-relaxed">
-            Select your dates, choose your apartment, and confirm your reservation.
-            It&apos;s that simple.
+          <p className="mt-4 text-white/50 max-w-md mx-auto leading-relaxed">
+            Velg datoer, leilighet, og bekreft reservasjonen. Enkelt og trygt.
           </p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 25 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="glass-card rounded-3xl p-8 md:p-12"
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="bg-white/5 border border-white/10 p-8 md:p-10"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
             <div>
-              <label className="block text-sm text-white/40 mb-2 tracking-wide">Check-in</label>
+              <label className="block text-sm text-white/40 mb-2">Innsjekk</label>
               <div className="relative">
-                <Calendar size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gold/60" />
+                <Calendar size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-brass/60" />
                 <input
                   type="date"
                   value={checkIn}
                   onChange={(e) => setCheckIn(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white focus:border-gold/50 focus:outline-none transition-colors appearance-none"
+                  className="w-full pl-11 pr-4 py-3.5 bg-white/5 border border-white/10 text-white focus:border-brass/50 focus:outline-none transition-colors text-sm"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm text-white/40 mb-2 tracking-wide">Check-out</label>
+              <label className="block text-sm text-white/40 mb-2">Utsjekk</label>
               <div className="relative">
-                <Calendar size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gold/60" />
+                <Calendar size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-brass/60" />
                 <input
                   type="date"
                   value={checkOut}
                   onChange={(e) => setCheckOut(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white focus:border-gold/50 focus:outline-none transition-colors appearance-none"
+                  className="w-full pl-11 pr-4 py-3.5 bg-white/5 border border-white/10 text-white focus:border-brass/50 focus:outline-none transition-colors text-sm"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm text-white/40 mb-2 tracking-wide">Guests</label>
+              <label className="block text-sm text-white/40 mb-2">Gjester</label>
               <div className="relative">
-                <Users size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gold/60" />
+                <Users size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-brass/60" />
                 <select
                   value={guests}
                   onChange={(e) => setGuests(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white focus:border-gold/50 focus:outline-none transition-colors appearance-none"
+                  className="w-full pl-11 pr-4 py-3.5 bg-white/5 border border-white/10 text-white focus:border-brass/50 focus:outline-none transition-colors text-sm appearance-none"
                 >
                   {[1, 2, 3, 4].map((n) => (
-                    <option key={n} value={n} className="bg-midnight text-white">
-                      {n} {n === 1 ? 'Guest' : 'Guests'}
+                    <option key={n} value={n} className="bg-stone text-white">
+                      {n} {n === 1 ? 'gjest' : 'gjester'}
                     </option>
                   ))}
                 </select>
@@ -91,47 +86,31 @@ export default function BookingSection() {
             </div>
 
             <div>
-              <label className="block text-sm text-white/40 mb-2 tracking-wide">Apartment</label>
-              <div className="relative">
-                <Home size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gold/60" />
-                <select
-                  value={selectedApartment}
-                  onChange={(e) => setSelectedApartment(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white focus:border-gold/50 focus:outline-none transition-colors appearance-none"
-                >
-                  <option value="" className="bg-midnight text-white">Any apartment</option>
-                  {apartments.map((apt) => (
-                    <option key={apt.id} value={apt.id} className="bg-midnight text-white">
-                      {apt.name} — {apt.location}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <label className="block text-sm text-white/40 mb-2">Leilighet</label>
+              <select
+                value={apartment}
+                onChange={(e) => setApartment(e.target.value)}
+                className="w-full px-4 py-3.5 bg-white/5 border border-white/10 text-white focus:border-brass/50 focus:outline-none transition-colors text-sm appearance-none"
+              >
+                <option value="" className="bg-stone">Alle leiligheter</option>
+                {apartments.map((apt) => (
+                  <option key={apt.id} value={apt.id} className="bg-stone">
+                    {apt.name} — {apt.location}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 
-          <div className="flex flex-col items-center gap-4">
-            <button
-              className="btn-primary w-full md:w-auto group"
-            >
-              Check Availability
-              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </button>
-            <p className="text-white/30 text-xs">Powered by Hostaway • Instant confirmation</p>
-          </div>
+          <button className="btn-brass w-full group">
+            Sjekk tilgjengelighet
+            <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
+          </button>
 
-          {/* Hostaway Widget Container — replace ACCOUNT_ID with actual Hostaway account ID */}
-          <div id="hostaway-booking-widget" className="mt-8" />
+          <p className="text-center text-white/25 text-xs mt-5">
+            Drevet av Hostaway · Gratis avbestilling opptil 48 timer før innsjekk
+          </p>
         </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-center mt-8 text-white/30 text-sm"
-        >
-          Free cancellation up to 48 hours before check-in • No hidden fees
-        </motion.p>
       </div>
     </section>
   )

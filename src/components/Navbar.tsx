@@ -5,12 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
-  { label: 'Apartments', href: '#apartments' },
-  { label: 'Neighborhoods', href: '#neighborhoods' },
-  { label: 'Activities', href: '#activities' },
-  { label: 'For Business', href: '#business' },
-  { label: 'Rent Out', href: '#rent-out' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Leiligheter', href: '#apartments' },
+  { label: 'Nabolag', href: '#neighborhoods' },
+  { label: 'Opplevelser', href: '#activities' },
+  { label: 'For bedrifter', href: '#business' },
+  { label: 'Kontakt', href: '#contact' },
 ]
 
 export default function Navbar() {
@@ -24,11 +23,7 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen])
 
@@ -37,19 +32,19 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: [0.25, 0.1, 0, 1] }}
+        transition={{ duration: 0.6, ease: [0.25, 0.1, 0, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-midnight/90 backdrop-blur-xl border-b border-white/5 py-3'
-            : 'bg-transparent py-6'
+            ? 'bg-linen/95 backdrop-blur-lg border-b border-warm-border py-3 shadow-sm'
+            : 'bg-transparent py-5'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
           <a href="#" className="relative z-10">
-            <span className="font-display text-2xl font-semibold tracking-wide">
-              BA<span className="text-gradient-gold">5</span>
+            <span className="font-display text-2xl font-semibold tracking-wide text-stone">
+              BA<span className="text-brass">5</span>
             </span>
-            <span className="block text-[10px] tracking-[0.3em] uppercase text-slate-custom font-medium -mt-1">
+            <span className="block text-[9px] tracking-[0.3em] uppercase text-text-muted font-medium -mt-0.5">
               Apartments
             </span>
           </a>
@@ -59,25 +54,32 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-white/60 hover:text-white transition-colors duration-300 tracking-wide"
+                className={`text-[13px] font-medium transition-colors duration-300 tracking-wide ${
+                  scrolled ? 'text-text-muted hover:text-stone' : 'text-white/70 hover:text-white'
+                }`}
               >
                 {link.label}
               </a>
             ))}
           </div>
 
-          <div className="hidden lg:flex items-center">
-            <a href="#booking" className="btn-nav">
-              Book Now
-            </a>
-          </div>
+          <a
+            href="#booking"
+            className={`hidden lg:inline-flex items-center px-5 py-2.5 text-[13px] font-medium tracking-wider uppercase transition-all duration-300 ${
+              scrolled
+                ? 'bg-stone text-white hover:bg-stone-light'
+                : 'bg-white/15 backdrop-blur-sm text-white border border-white/20 hover:bg-white/25'
+            }`}
+          >
+            Book nå
+          </a>
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden relative z-10 p-2 text-white"
+            className={`lg:hidden relative z-10 p-2 ${scrolled ? 'text-stone' : 'text-white'}`}
             aria-label="Toggle menu"
           >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </motion.nav>
@@ -89,19 +91,19 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-midnight/98 backdrop-blur-2xl flex flex-col items-center justify-center"
+            className="fixed inset-0 z-40 bg-linen flex flex-col items-center justify-center"
           >
-            <nav className="flex flex-col items-center gap-8">
+            <nav className="flex flex-col items-center gap-7">
               {navLinks.map((link, i) => (
                 <motion.a
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
+                  exit={{ opacity: 0, y: 15 }}
                   transition={{ delay: i * 0.05, duration: 0.3 }}
-                  className="text-2xl font-display font-medium text-white/80 hover:text-white transition-colors"
+                  className="text-xl font-display font-medium text-stone"
                 >
                   {link.label}
                 </motion.a>
@@ -109,13 +111,13 @@ export default function Navbar() {
               <motion.a
                 href="#booking"
                 onClick={() => setMobileOpen(false)}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
+                exit={{ opacity: 0, y: 15 }}
                 transition={{ delay: navLinks.length * 0.05, duration: 0.3 }}
-                className="btn-primary mt-4 text-lg"
+                className="btn-primary mt-4"
               >
-                Book Now
+                Book nå
               </motion.a>
             </nav>
           </motion.div>
