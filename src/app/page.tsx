@@ -2,12 +2,9 @@ import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import Features from '@/components/Features'
 import ApartmentShowcase from '@/components/ApartmentShowcase'
-import BookingSection from '@/components/BookingSection'
-import Neighborhoods from '@/components/Neighborhoods'
 import Testimonials from '@/components/Testimonials'
-import Activities from '@/components/Activities'
-import CompanyAgreements from '@/components/CompanyAgreements'
-import RentOut from '@/components/RentOut'
+import BookingSection from '@/components/BookingSection'
+import About from '@/components/About'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 
@@ -18,12 +15,9 @@ export default function Home() {
       <Hero />
       <Features />
       <ApartmentShowcase />
-      <BookingSection />
-      <Neighborhoods />
       <Testimonials />
-      <Activities />
-      <CompanyAgreements />
-      <RentOut />
+      <BookingSection />
+      <About />
       <Contact />
       <Footer />
     </main>
