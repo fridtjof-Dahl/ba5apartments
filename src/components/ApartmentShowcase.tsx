@@ -6,7 +6,7 @@ import { MapPin, Users, Maximize } from 'lucide-react'
 import { apartments } from '@/data/apartments'
 
 function Card({ apt, i }: { apt: typeof apartments[0]; i: number }) {
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLAnchorElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
