@@ -1,17 +1,29 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { CalendarDays, Users, Search, Check } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 export default function Hero() {
   const t = useTranslations('Hero')
+  const [checkIn, setCheckIn] = useState('')
+  const [checkOut, setCheckOut] = useState('')
+  const [guests, setGuests] = useState('2')
 
-  const perks = [
-    { img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=100&q=60', label: t('perk1') },
-    { img: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=100&q=60', label: t('perk2') },
-    { img: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=100&q=60', label: t('perk3') },
-    { img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=100&q=60', label: t('perk4') },
-  ]
+  const today = new Date().toISOString().split('T')[0]
+
+  function handleSearch(e: React.FormEvent) {
+    e.preventDefault()
+    window.dispatchEvent(
+      new CustomEvent('hero-search', {
+        detail: { checkIn, checkOut, guests },
+      }),
+    )
+    document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const trustBadges = [t('trust1'), t('trust2'), t('trust3')]
 
   return (
     <section className="relative min-h-screen bg-gradient-to-b from-dark via-dark/95 to-sand overflow-hidden">
@@ -38,37 +50,104 @@ export default function Hero() {
           {t('subtitle')}
         </motion.p>
 
-        <motion.a
-          href="#apartments"
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.65 }}
-          className="mt-10 inline-flex items-center gap-2.5 bg-white text-ink px-8 py-3.5 rounded-full text-sm font-semibold hover:bg-white/90 transition-all"
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-ink/30" />
-          {t('cta')}
-          <span className="w-1.5 h-1.5 rounded-full bg-ink/30" />
-        </motion.a>
-
+        {/* ── Booking bar ── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.85 }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-3 w-full max-w-3xl"
+          transition={{ duration: 0.7, delay: 0.65 }}
+          className="mt-10 md:mt-14 w-full max-w-3xl"
         >
-          {perks.map(p => (
-            <div
-              key={p.label}
-              className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-4 py-3"
-            >
-              <img
-                src={p.img}
-                alt=""
-                className="w-9 h-9 rounded-full object-cover flex-shrink-0"
-              />
-              <span className="text-white/80 text-xs font-medium leading-tight">
-                {p.label}
-              </span>
+          <form onSubmit={handleSearch}>
+            <div className="bg-white/[0.07] backdrop-blur-2xl rounded-2xl md:rounded-full p-1.5 md:p-2 border border-white/[0.12] shadow-2xl shadow-black/20">
+              <div className="flex flex-col md:flex-row items-stretch md:items-center">
+
+                {/* Check-in */}
+                <div className="flex-1 flex items-center gap-3 px-4 md:px-5 py-3 md:py-2.5 group">
+                  <CalendarDays size={16} className="text-white/30 group-focus-within:text-sage transition-colors flex-shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <label className="block text-[10px] font-semibold text-white/35 uppercase tracking-widest mb-0.5">
+                      {t('bookCheckIn')}
+                    </label>
+                    <input
+                      type="date"
+                      value={checkIn}
+                      onChange={e => setCheckIn(e.target.value)}
+                      min={today}
+                      required
+                      className="w-full bg-transparent text-white text-sm outline-none cursor-pointer [color-scheme:dark]"
+                    />
+                  </div>
+                </div>
+
+                <div className="hidden md:block w-px h-10 bg-white/10 flex-shrink-0" />
+                <hr className="md:hidden border-white/[0.06] mx-4" />
+
+                {/* Check-out */}
+                <div className="flex-1 flex items-center gap-3 px-4 md:px-5 py-3 md:py-2.5 group">
+                  <CalendarDays size={16} className="text-white/30 group-focus-within:text-sage transition-colors flex-shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <label className="block text-[10px] font-semibold text-white/35 uppercase tracking-widest mb-0.5">
+                      {t('bookCheckOut')}
+                    </label>
+                    <input
+                      type="date"
+                      value={checkOut}
+                      onChange={e => setCheckOut(e.target.value)}
+                      min={checkIn || today}
+                      required
+                      className="w-full bg-transparent text-white text-sm outline-none cursor-pointer [color-scheme:dark]"
+                    />
+                  </div>
+                </div>
+
+                <div className="hidden md:block w-px h-10 bg-white/10 flex-shrink-0" />
+                <hr className="md:hidden border-white/[0.06] mx-4" />
+
+                {/* Guests */}
+                <div className="flex-1 flex items-center gap-3 px-4 md:px-5 py-3 md:py-2.5 group">
+                  <Users size={16} className="text-white/30 group-focus-within:text-sage transition-colors flex-shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <label className="block text-[10px] font-semibold text-white/35 uppercase tracking-widest mb-0.5">
+                      {t('bookGuests')}
+                    </label>
+                    <select
+                      value={guests}
+                      onChange={e => setGuests(e.target.value)}
+                      className="w-full bg-transparent text-white text-sm outline-none appearance-none cursor-pointer [color-scheme:dark]"
+                    >
+                      {[1, 2, 3, 4].map(n => (
+                        <option key={n} value={n} className="bg-dark text-white">
+                          {t('bookGuest', { count: n })}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Search CTA */}
+                <button
+                  type="submit"
+                  className="bg-sage hover:bg-sage-light active:scale-[0.98] text-white px-6 md:px-8 py-3.5 md:py-3 rounded-xl md:rounded-full text-sm font-semibold transition-all flex items-center justify-center gap-2 m-1 flex-shrink-0 shadow-lg shadow-sage/20"
+                >
+                  <Search size={15} />
+                  {t('bookSearch')}
+                </button>
+              </div>
+            </div>
+          </form>
+        </motion.div>
+
+        {/* ── Trust badges ── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
+          className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
+        >
+          {trustBadges.map(badge => (
+            <div key={badge} className="flex items-center gap-1.5 text-white/35 text-xs">
+              <Check size={12} className="text-sage/70" />
+              {badge}
             </div>
           ))}
         </motion.div>

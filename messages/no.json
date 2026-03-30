@@ -20,7 +20,15 @@
     "perk1": "Fullt møblerte leiligheter",
     "perk2": "Sentral beliggenhet",
     "perk3": "Profesjonelt rengjort",
-    "perk4": "Designet for komfort"
+    "perk4": "Designet for komfort",
+    "bookCheckIn": "Innsjekk",
+    "bookCheckOut": "Utsjekk",
+    "bookGuests": "Gjester",
+    "bookGuest": "{count, plural, one {# gjest} other {# gjester}}",
+    "bookSearch": "Finn ditt opphold",
+    "trust1": "Gratis avbestilling",
+    "trust2": "Selvinnsjekking 24/7",
+    "trust3": "Profesjonelt rengjort"
   },
   "About": {
     "label": "Om BA5 Apartments",

@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { CheckCircle, Loader2 } from 'lucide-react'
 import { apartments } from '@/data/apartments'
@@ -24,6 +24,20 @@ export default function BookingSection() {
   const [loadedAt] = useState(() => Date.now())
   const [hp, setHp] = useState('')
   const set = (k: string, v: string) => setForm(p => ({ ...p, [k]: v }))
+
+  useEffect(() => {
+    function handleHeroSearch(e: Event) {
+      const { checkIn, checkOut, guests } = (e as CustomEvent).detail
+      setForm(prev => ({
+        ...prev,
+        ...(checkIn && { checkIn }),
+        ...(checkOut && { checkOut }),
+        ...(guests && { guests }),
+      }))
+    }
+    window.addEventListener('hero-search', handleHeroSearch)
+    return () => window.removeEventListener('hero-search', handleHeroSearch)
+  }, [])
 
   const inputCls =
     'w-full px-4 py-3 rounded-xl bg-dark-card border border-white/10 text-sm text-white placeholder-white/30 focus:border-sage focus:ring-1 focus:ring-sage/30 focus:outline-none transition-all'
