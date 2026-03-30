@@ -2,13 +2,33 @@
 
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Mail, Phone, MapPin, Send } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, CheckCircle, Loader2 } from 'lucide-react'
 
 export default function Contact() {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [loadedAt] = useState(() => Date.now())
+  const [hp, setHp] = useState('')
   const set = (k: string, v: string) => setForm(p => ({ ...p, [k]: v }))
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setStatus('loading')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, _hp: hp, _t: loadedAt }),
+      })
+      if (!res.ok) throw new Error()
+      setStatus('success')
+      setForm({ name: '', email: '', message: '' })
+    } catch {
+      setStatus('error')
+    }
+  }
 
   return (
     <section id="contact" className="py-20 md:py-28 px-6 bg-sand">
@@ -46,31 +66,66 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
-            onSubmit={e => { e.preventDefault(); alert('Takk! Vi tar kontakt snart.') }}
+            onSubmit={handleSubmit}
             className="bg-white rounded-2xl p-8 shadow-sm"
           >
-            <div className="space-y-4 mb-6">
-              <div>
-                <label className="block text-xs font-medium text-ink-light mb-1.5">Navn</label>
-                <input type="text" required value={form.name} onChange={e => set('name', e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-sage focus:ring-1 focus:ring-sage/20 focus:outline-none transition-all" />
+            {status === 'success' ? (
+              <div className="flex flex-col items-center justify-center py-12 gap-3 text-center">
+                <CheckCircle size={40} className="text-sage" />
+                <p className="font-semibold text-ink">Meldingen er sendt!</p>
+                <p className="text-sm text-ink-light">Vi tar kontakt med deg snart.</p>
+                <button
+                  type="button"
+                  onClick={() => setStatus('idle')}
+                  className="mt-4 text-sm text-sage underline underline-offset-2"
+                >
+                  Send en ny melding
+                </button>
               </div>
-              <div>
-                <label className="block text-xs font-medium text-ink-light mb-1.5">E-post</label>
-                <input type="email" required value={form.email} onChange={e => set('email', e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-sage focus:ring-1 focus:ring-sage/20 focus:outline-none transition-all" />
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-ink-light mb-1.5">Melding</label>
-                <textarea required rows={4} value={form.message} onChange={e => set('message', e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-sage focus:ring-1 focus:ring-sage/20 focus:outline-none transition-all resize-none" />
-              </div>
-            </div>
+            ) : (
+              <>
+                <div aria-hidden="true" className="absolute opacity-0 h-0 overflow-hidden pointer-events-none" tabIndex={-1}>
+                  <label htmlFor="website">Website</label>
+                  <input id="website" type="text" value={hp} onChange={e => setHp(e.target.value)} autoComplete="off" tabIndex={-1} />
+                </div>
 
-            <button type="submit"
-              className="w-full flex items-center justify-center gap-2 bg-sage text-white py-3.5 rounded-xl text-sm font-semibold hover:bg-sage-light transition-colors">
-              Send melding <Send size={14} />
-            </button>
+                <div className="space-y-4 mb-6">
+                  <div>
+                    <label className="block text-xs font-medium text-ink-light mb-1.5">Navn</label>
+                    <input type="text" required value={form.name} onChange={e => set('name', e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-sage focus:ring-1 focus:ring-sage/20 focus:outline-none transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-ink-light mb-1.5">E-post</label>
+                    <input type="email" required value={form.email} onChange={e => set('email', e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-sage focus:ring-1 focus:ring-sage/20 focus:outline-none transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-ink-light mb-1.5">Melding</label>
+                    <textarea required rows={4} value={form.message} onChange={e => set('message', e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-sage focus:ring-1 focus:ring-sage/20 focus:outline-none transition-all resize-none" />
+                  </div>
+                </div>
+
+                {status === 'error' && (
+                  <p className="text-sm text-red-500 mb-4">
+                    Noe gikk galt. Prøv igjen eller send e-post direkte til post@ba5apartments.com
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="w-full flex items-center justify-center gap-2 bg-sage text-white py-3.5 rounded-xl text-sm font-semibold hover:bg-sage-light transition-colors disabled:opacity-60"
+                >
+                  {status === 'loading' ? (
+                    <><Loader2 size={14} className="animate-spin" /> Sender...</>
+                  ) : (
+                    <>Send melding <Send size={14} /></>
+                  )}
+                </button>
+              </>
+            )}
           </motion.form>
         </div>
       </div>
