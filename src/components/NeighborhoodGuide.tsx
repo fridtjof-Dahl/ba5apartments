@@ -6,16 +6,16 @@ import { useTranslations } from 'next-intl'
 
 const typeIcons: Record<string, any> = {
   Restaurant: UtensilsCrossed,
-  Kafé: Coffee,
-  Bakeri: Coffee,
+  Café: Coffee,
+  Bakery: Coffee,
   Shopping: ShoppingBag,
-  'Shopping & Mat': ShoppingBag,
+  'Shopping & Food': ShoppingBag,
   Transport: Train,
   Park: TreePine,
-  Strand: TreePine,
+  Beach: TreePine,
   Museum: Landmark,
-  Nabolag: MapPin,
-  'Mat & Marked': UtensilsCrossed,
+  Neighborhood: MapPin,
+  'Food Hall': UtensilsCrossed,
   'Bar & Restaurant': UtensilsCrossed,
 }
 

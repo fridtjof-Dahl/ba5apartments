@@ -220,6 +220,16 @@
     "heading": "Nabolaget — {location}",
     "walkScore": "Walk Score: {score}"
   },
+  "ImageGallery": {
+    "mainImage": "{name} — hovedbilde",
+    "imageN": "{name} — bilde {n}",
+    "morePhotos": "+{count} bilder",
+    "showAll": "Vis alle bilder"
+  },
+  "HostawayWidget": {
+    "bookNow": "Book nå",
+    "clearDates": "Tøm datoer"
+  },
   "LanguageSwitcher": {
     "en": "EN",
     "no": "NO"

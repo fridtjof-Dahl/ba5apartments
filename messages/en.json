@@ -220,6 +220,16 @@
     "heading": "The neighborhood — {location}",
     "walkScore": "Walk Score: {score}"
   },
+  "ImageGallery": {
+    "mainImage": "{name} — main image",
+    "imageN": "{name} — image {n}",
+    "morePhotos": "+{count} photos",
+    "showAll": "Show all photos"
+  },
+  "HostawayWidget": {
+    "bookNow": "Book now",
+    "clearDates": "Clear dates"
+  },
   "LanguageSwitcher": {
     "en": "EN",
     "no": "NO"

@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ChevronLeft, ChevronRight, Grid3X3 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   images: string[]
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export default function ImageGallery({ images, name }: Props) {
+  const t = useTranslations('ImageGallery')
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   const openLightbox = (i: number) => setLightboxIndex(i)
@@ -48,7 +50,7 @@ export default function ImageGallery({ images, name }: Props) {
         >
           <Image
             src={images[0]}
-            alt={`${name} — hovedbilde`}
+            alt={t('mainImage', { name })}
             fill
             priority
             className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -63,7 +65,7 @@ export default function ImageGallery({ images, name }: Props) {
           >
             <Image
               src={img}
-              alt={`${name} — bilde ${i + 2}`}
+              alt={t('imageN', { name, n: i + 2 })}
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-105"
               sizes="25vw"
@@ -77,7 +79,7 @@ export default function ImageGallery({ images, name }: Props) {
           >
             <Image
               src={images[3]}
-              alt={`${name} — bilde 4`}
+              alt={t('imageN', { name, n: 4 })}
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-105"
               sizes="25vw"
@@ -85,7 +87,7 @@ export default function ImageGallery({ images, name }: Props) {
             {images.length > 4 && (
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                 <span className="text-white font-semibold text-sm">
-                  +{images.length - 4} bilder
+                  {t('morePhotos', { count: images.length - 4 })}
                 </span>
               </div>
             )}
@@ -97,7 +99,7 @@ export default function ImageGallery({ images, name }: Props) {
           className="absolute bottom-4 right-4 md:bottom-6 md:right-6 z-10 bg-white/90 backdrop-blur-sm text-ink text-xs font-semibold px-4 py-2 rounded-full shadow-md hover:bg-white transition-colors flex items-center gap-2"
         >
           <Grid3X3 size={14} />
-          Vis alle bilder
+          {t('showAll')}
         </button>
       </div>
 
@@ -148,7 +150,7 @@ export default function ImageGallery({ images, name }: Props) {
             >
               <Image
                 src={images[lightboxIndex]}
-                alt={`${name} — bilde ${lightboxIndex + 1}`}
+                alt={t('imageN', { name, n: lightboxIndex + 1 })}
                 fill
                 className="object-contain"
                 sizes="90vw"

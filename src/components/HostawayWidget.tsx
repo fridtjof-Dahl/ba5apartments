@@ -1,14 +1,19 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   listingId?: number
 }
 
 export default function HostawayWidget({ listingId }: Props) {
+  const t = useTranslations('HostawayWidget')
   const containerRef = useRef<HTMLDivElement>(null)
   const loaded = useRef(false)
+
+  const bookNow = t('bookNow')
+  const clearDates = t('clearDates')
 
   useEffect(() => {
     if (!listingId || loaded.current) return
@@ -28,9 +33,9 @@ export default function HostawayWidget({ listingId }: Props) {
           rounded: true,
           button: {
             action: 'checkout',
-            text: 'Book nå',
+            text: bookNow,
           },
-          clearButtonText: 'Tøm datoer',
+          clearButtonText: clearDates,
           color: {
             mainColor: '#0C1B2A',
           },
@@ -44,7 +49,7 @@ export default function HostawayWidget({ listingId }: Props) {
         document.body.removeChild(script)
       } catch {}
     }
-  }, [listingId])
+  }, [listingId, bookNow, clearDates])
 
   if (!listingId) return null
 
