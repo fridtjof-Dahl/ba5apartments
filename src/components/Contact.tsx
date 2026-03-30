@@ -2,13 +2,15 @@
 
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Mail, Phone, MapPin, Send, CheckCircle, Loader2 } from 'lucide-react'
+import { Mail, Phone, MapPin, CheckCircle, Loader2 } from 'lucide-react'
 
 export default function Contact() {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const [form, setForm] = useState({ name: '', email: '', message: '' })
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [status, setStatus] = useState<
+    'idle' | 'loading' | 'success' | 'error'
+  >('idle')
   const [loadedAt] = useState(() => Date.now())
   const [hp, setHp] = useState('')
   const set = (k: string, v: string) => setForm(p => ({ ...p, [k]: v }))
@@ -30,34 +32,60 @@ export default function Contact() {
     }
   }
 
+  const inputCls =
+    'w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-sage focus:ring-1 focus:ring-sage/20 focus:outline-none transition-all'
+
   return (
-    <section id="contact" className="py-20 md:py-28 px-6 bg-sand">
+    <section id="contact" className="py-24 md:py-32 px-6 bg-sand">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <motion.div
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="font-display text-3xl md:text-4xl text-ink mb-4">Ta kontakt</h2>
+            <p className="text-sm font-medium text-ink-light tracking-wide mb-4">
+              Kontaktinformasjon
+            </p>
+            <h2 className="font-display text-3xl md:text-4xl text-ink mb-4">
+              Ta kontakt med oss
+            </h2>
             <p className="text-ink-light leading-relaxed mb-10 max-w-md">
-              Spørsmål om booking, bedriftsavtaler eller utleie?
-              Vi svarer gjerne.
+              Har du spørsmål om booking, bedriftsavtaler eller noe annet? Vi
+              hjelper deg gjerne — ta kontakt så svarer vi så raskt vi kan.
             </p>
 
             <div className="space-y-5">
               {[
-                { icon: Mail, label: 'post@ba5apartments.com' },
-                { icon: Phone, label: '+47 909 79 722' },
-                { icon: MapPin, label: 'Oslo, Norge' },
-              ].map(({ icon: I, label }) => (
-                <div key={label} className="flex items-center gap-3">
+                {
+                  icon: MapPin,
+                  label: 'Oslo, Norge',
+                  href: 'https://maps.google.com/?q=Oslo+Norge',
+                },
+                {
+                  icon: Phone,
+                  label: '+47 909 79 722',
+                  href: 'tel:+4790979722',
+                },
+                {
+                  icon: Mail,
+                  label: 'post@ba5apartments.com',
+                  href: 'mailto:post@ba5apartments.com',
+                },
+              ].map(({ icon: I, label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  className="flex items-center gap-3 group"
+                >
                   <div className="w-10 h-10 rounded-full bg-sage/10 flex items-center justify-center">
                     <I size={16} className="text-sage" />
                   </div>
-                  <span className="text-ink text-sm">{label}</span>
-                </div>
+                  <span className="text-ink text-sm group-hover:text-sage transition-colors">
+                    {label}
+                  </span>
+                </a>
               ))}
             </div>
           </motion.div>
@@ -67,13 +95,15 @@ export default function Contact() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
             onSubmit={handleSubmit}
-            className="bg-white rounded-2xl p-8 shadow-sm"
+            className="bg-white rounded-3xl p-8 shadow-sm"
           >
             {status === 'success' ? (
               <div className="flex flex-col items-center justify-center py-12 gap-3 text-center">
                 <CheckCircle size={40} className="text-sage" />
                 <p className="font-semibold text-ink">Meldingen er sendt!</p>
-                <p className="text-sm text-ink-light">Vi tar kontakt med deg snart.</p>
+                <p className="text-sm text-ink-light">
+                  Vi tar kontakt med deg snart.
+                </p>
                 <button
                   type="button"
                   onClick={() => setStatus('idle')}
@@ -84,44 +114,79 @@ export default function Contact() {
               </div>
             ) : (
               <>
-                <div aria-hidden="true" className="absolute opacity-0 h-0 overflow-hidden pointer-events-none" tabIndex={-1}>
+                <div
+                  aria-hidden="true"
+                  className="absolute opacity-0 h-0 overflow-hidden pointer-events-none"
+                  tabIndex={-1}
+                >
                   <label htmlFor="website">Website</label>
-                  <input id="website" type="text" value={hp} onChange={e => setHp(e.target.value)} autoComplete="off" tabIndex={-1} />
+                  <input
+                    id="website"
+                    type="text"
+                    value={hp}
+                    onChange={e => setHp(e.target.value)}
+                    autoComplete="off"
+                    tabIndex={-1}
+                  />
                 </div>
 
                 <div className="space-y-4 mb-6">
                   <div>
-                    <label className="block text-xs font-medium text-ink-light mb-1.5">Navn</label>
-                    <input type="text" required value={form.name} onChange={e => set('name', e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-sage focus:ring-1 focus:ring-sage/20 focus:outline-none transition-all" />
+                    <label className="block text-xs font-medium text-ink-light mb-1.5">
+                      Navn *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={form.name}
+                      onChange={e => set('name', e.target.value)}
+                      className={inputCls}
+                    />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-ink-light mb-1.5">E-post</label>
-                    <input type="email" required value={form.email} onChange={e => set('email', e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-sage focus:ring-1 focus:ring-sage/20 focus:outline-none transition-all" />
+                    <label className="block text-xs font-medium text-ink-light mb-1.5">
+                      E-post *
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={form.email}
+                      onChange={e => set('email', e.target.value)}
+                      className={inputCls}
+                    />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-ink-light mb-1.5">Melding</label>
-                    <textarea required rows={4} value={form.message} onChange={e => set('message', e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-sage focus:ring-1 focus:ring-sage/20 focus:outline-none transition-all resize-none" />
+                    <label className="block text-xs font-medium text-ink-light mb-1.5">
+                      Melding *
+                    </label>
+                    <textarea
+                      required
+                      rows={4}
+                      value={form.message}
+                      onChange={e => set('message', e.target.value)}
+                      className={`${inputCls} resize-none`}
+                    />
                   </div>
                 </div>
 
                 {status === 'error' && (
                   <p className="text-sm text-red-500 mb-4">
-                    Noe gikk galt. Prøv igjen eller send e-post direkte til post@ba5apartments.com
+                    Noe gikk galt. Prøv igjen eller send e-post direkte til
+                    post@ba5apartments.com
                   </p>
                 )}
 
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="w-full flex items-center justify-center gap-2 bg-sage text-white py-3.5 rounded-xl text-sm font-semibold hover:bg-sage-light transition-colors disabled:opacity-60"
+                  className="w-full flex items-center justify-center gap-2 bg-dark text-white py-3.5 rounded-xl text-sm font-semibold hover:bg-dark/80 transition-colors disabled:opacity-60"
                 >
                   {status === 'loading' ? (
-                    <><Loader2 size={14} className="animate-spin" /> Sender...</>
+                    <>
+                      <Loader2 size={14} className="animate-spin" /> Sender...
+                    </>
                   ) : (
-                    <>Send melding <Send size={14} /></>
+                    'Send melding'
                   )}
                 </button>
               </>

@@ -2,63 +2,74 @@
 
 import { motion } from 'framer-motion'
 
+const perks = [
+  { img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=100&q=60', label: 'Fullt møblerte leiligheter' },
+  { img: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=100&q=60', label: 'Sentral beliggenhet' },
+  { img: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=100&q=60', label: 'Profesjonelt rengjort' },
+  { img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=100&q=60', label: 'Designet for komfort' },
+]
+
 export default function Hero() {
   return (
-    <section className="relative h-[90vh] min-h-[600px]">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url('/images/hero.avif')` }}
-      />
-      <div className="absolute inset-0 bg-black/35" />
+    <section className="relative min-h-screen bg-gradient-to-b from-dark via-dark/95 to-sand overflow-hidden">
+      <div className="absolute inset-0 bg-[url('/images/hero.avif')] bg-cover bg-center opacity-30" />
 
-      <div className="relative z-10 h-full flex flex-col justify-end pb-16 md:pb-20 px-6">
-        <div className="max-w-7xl mx-auto w-full">
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-white/60 text-sm tracking-widest uppercase mb-4"
-          >
-            Premium leiligheter i Oslo
-          </motion.p>
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1] max-w-3xl"
+        >
+          Designet for komfort.
+          <br />
+          <span className="italic">Skreddersydd for deg.</span>
+        </motion.h1>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.05] max-w-2xl"
-          >
-            Ditt hjem,
-            <br />
-            <span className="italic">borte fra hjemmet</span>
-          </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.45 }}
+          className="mt-6 text-white/60 max-w-lg text-[15px] md:text-base leading-relaxed"
+        >
+          Vi tilbyr håndplukkede, fullt møblerte leiligheter for deg
+          som verdsetter privatliv, komfort og nærhet til byen.
+        </motion.p>
 
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-5 text-white/50 max-w-md text-[15px] leading-relaxed"
-          >
-            Fullt møblerte leiligheter i Oslos fineste nabolag.
-            Trygt, komfortabelt og helt som hjemme.
-          </motion.p>
+        <motion.a
+          href="#apartments"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.65 }}
+          className="mt-10 inline-flex items-center gap-2.5 bg-white text-ink px-8 py-3.5 rounded-full text-sm font-semibold hover:bg-white/90 transition-all"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-ink/30" />
+          Utforsk leilighetene
+          <span className="w-1.5 h-1.5 rounded-full bg-ink/30" />
+        </motion.a>
 
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.65 }}
-            className="mt-8 flex flex-wrap gap-3"
-          >
-            <a href="#booking"
-              className="bg-white text-ink px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-white/90 transition-all">
-              Se tilgjengelighet
-            </a>
-            <a href="#apartments"
-              className="border border-white/30 text-white px-7 py-3.5 rounded-full text-sm font-medium hover:bg-white/10 transition-all">
-              Utforsk leiligheter
-            </a>
-          </motion.div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.85 }}
+          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-3 w-full max-w-3xl"
+        >
+          {perks.map(p => (
+            <div
+              key={p.label}
+              className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-4 py-3"
+            >
+              <img
+                src={p.img}
+                alt=""
+                className="w-9 h-9 rounded-full object-cover flex-shrink-0"
+              />
+              <span className="text-white/80 text-xs font-medium leading-tight">
+                {p.label}
+              </span>
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   )

@@ -2,50 +2,75 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Shield, Heart, Clock, Building2 } from 'lucide-react'
-
-const perks = [
-  { icon: Shield, title: 'Trygt & forsikret', desc: 'Alle opphold er dekket av forsikring, med sikker innsjekking og et dedikert supportteam.' },
-  { icon: Heart, title: 'Personlig vertskap', desc: 'Vi kjenner leilighetene og nabolagene — og deler gjerne våre beste tips med deg.' },
-  { icon: Clock, title: 'Fleksibelt', desc: 'Kort ferie, jobb-opphold eller lengre perioder. Vi tilpasser oss dine behov.' },
-  { icon: Building2, title: 'Bedriftsavtaler', desc: 'Skreddersydde løsninger for bedrifter som trenger bolig til ansatte i Oslo.' },
-]
 
 export default function About() {
   const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="about" className="py-20 md:py-28 px-6">
+    <section id="about" className="py-24 md:py-32 px-6">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="max-w-xl mb-14"
-        >
-          <h2 className="font-display text-3xl md:text-4xl text-ink">Mer enn et hotell</h2>
-          <p className="mt-3 text-ink-light leading-relaxed">
-            BA5 Apartments er en del av BA5 Invest — et norsk eiendomsselskap som tilbyr
-            premium korttidsleie i Oslo. Vi kombinerer hotellets komfort med hjemmets varme.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {perks.map((p, i) => (
-            <motion.div
-              key={p.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="p-6 rounded-2xl bg-sand"
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <motion.div
+            ref={ref}
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-sm font-medium text-ink-light tracking-wide mb-4">
+              Om BA5 Apartments
+            </p>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-ink leading-[1.15] mb-6">
+              Vi redefinerer hva det betyr å føle seg hjemme
+            </h2>
+            <p className="text-ink-light leading-relaxed mb-4">
+              BA5 Apartments er en del av BA5 Invest — et norsk eiendomsselskap
+              som kombinerer moderne design med varm gjestfrihet. Våre håndplukkede
+              leiligheter i Oslos fineste nabolag gir deg rommet til å slappe av,
+              jobbe og leve — med hotellets komfort og hjemmets varme.
+            </p>
+            <p className="text-ink-light leading-relaxed mb-8">
+              Enten du er i Oslo for forretninger, en kort ferie, eller et lengre
+              opphold, tilpasser vi oss dine behov. Hver leilighet er fullt møblert
+              og gjennomtenkt ned til minste detalj.
+            </p>
+            <a
+              href="#apartments"
+              className="inline-flex items-center gap-2.5 bg-dark text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-dark/80 transition-all"
             >
-              <p.icon size={22} className="text-sage mb-4" strokeWidth={1.5} />
-              <h3 className="font-semibold text-ink text-[15px] mb-1.5">{p.title}</h3>
-              <p className="text-ink-light text-sm leading-relaxed">{p.desc}</p>
-            </motion.div>
-          ))}
+              <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
+              Utforsk leilighetene
+              <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
+            </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="relative"
+          >
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-4">
+                <div className="rounded-3xl overflow-hidden aspect-[3/4]">
+                  <img
+                    src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80"
+                    alt="Leilighet interiør"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+              <div className="space-y-4 pt-8">
+                <div className="rounded-3xl overflow-hidden aspect-[3/4]">
+                  <img
+                    src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80"
+                    alt="Leilighet stue"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
