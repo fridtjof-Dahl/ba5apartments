@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { CalendarDays, Users, Search, Check } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import ScrollIndicator from './ScrollIndicator'
 
 export default function Hero() {
   const t = useTranslations('Hero')
@@ -152,6 +153,8 @@ export default function Hero() {
           ))}
         </motion.div>
       </div>
+
+      <ScrollIndicator />
     </section>
   )
 }

@@ -228,6 +228,22 @@
     "heading": "The neighborhood — {location}",
     "walkScore": "Walk Score: {score}"
   },
+  "WhyBA5": {
+    "label": "Why BA5?",
+    "heading": "The best of both worlds",
+    "subtitle": "We combine the comfort and service of a hotel with the space and freedom of a private apartment.",
+    "feature": "Feature",
+    "hotel": "Hotel",
+    "fullKitchen": "Fully equipped kitchen",
+    "selfCheckIn": "Flexible self check-in",
+    "washer": "Washer & dryer",
+    "proClean": "Professional cleaning",
+    "localArea": "Authentic neighborhood feel",
+    "freeCancellation": "Free cancellation",
+    "privateSpace": "Your own private space",
+    "support247": "24/7 host support",
+    "disclaimer": "Comparison based on typical offerings. Actual amenities may vary by property."
+  },
   "ImageGallery": {
     "mainImage": "{name} — main image",
     "imageN": "{name} — image {n}",

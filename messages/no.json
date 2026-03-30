@@ -228,6 +228,22 @@
     "heading": "Nabolaget — {location}",
     "walkScore": "Walk Score: {score}"
   },
+  "WhyBA5": {
+    "label": "Hvorfor BA5?",
+    "heading": "Det beste fra to verdener",
+    "subtitle": "Vi kombinerer hotellets komfort og service med rommet og friheten til en privat leilighet.",
+    "feature": "Egenskap",
+    "hotel": "Hotell",
+    "fullKitchen": "Fullt utstyrt kjøkken",
+    "selfCheckIn": "Fleksibel selvinnsjekking",
+    "washer": "Vaskemaskin og tørketrommel",
+    "proClean": "Profesjonell rengjøring",
+    "localArea": "Autentisk nabolagsfølelse",
+    "freeCancellation": "Gratis avbestilling",
+    "privateSpace": "Ditt eget private rom",
+    "support247": "24/7 vertsstøtte",
+    "disclaimer": "Sammenligning basert på typiske tilbud. Faktiske fasiliteter kan variere."
+  },
   "ImageGallery": {
     "mainImage": "{name} — hovedbilde",
     "imageN": "{name} — bilde {n}",
