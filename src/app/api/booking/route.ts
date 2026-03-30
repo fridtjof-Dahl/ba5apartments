@@ -9,9 +9,15 @@ import {
   sanitize,
 } from '@/lib/spam'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 const TO = 'post@ba5apartments.com'
 const FROM = 'BA5 Apartments <no-reply@ba5apartments.com>'
+
+function getResend() {
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error('RESEND_API_KEY is not configured')
+  }
+  return new Resend(process.env.RESEND_API_KEY)
+}
 
 export async function POST(req: Request) {
   try {
@@ -42,6 +48,7 @@ export async function POST(req: Request) {
     const safeEmail = sanitize(email)
     const safeApartment = sanitize(apartment || 'Ikke spesifisert')
 
+    const resend = getResend()
     const [ownerResult, guestResult] = await Promise.all([
       resend.emails.send({
         from: FROM,
