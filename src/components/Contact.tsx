@@ -3,8 +3,10 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Mail, Phone, MapPin, CheckCircle, Loader2 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 export default function Contact() {
+  const t = useTranslations('Contact')
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const [form, setForm] = useState({ name: '', email: '', message: '' })
@@ -46,39 +48,22 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
           >
             <p className="text-sm font-medium text-ink-light tracking-wide mb-4">
-              Kontaktinformasjon
+              {t('label')}
             </p>
             <h2 className="font-display text-3xl md:text-4xl text-ink mb-4">
-              Ta kontakt med oss
+              {t('heading')}
             </h2>
             <p className="text-ink-light leading-relaxed mb-10 max-w-md">
-              Har du spørsmål om booking, bedriftsavtaler eller noe annet? Vi
-              hjelper deg gjerne — ta kontakt så svarer vi så raskt vi kan.
+              {t('subtitle')}
             </p>
 
             <div className="space-y-5">
               {[
-                {
-                  icon: MapPin,
-                  label: 'Oslo, Norge',
-                  href: 'https://maps.google.com/?q=Oslo+Norge',
-                },
-                {
-                  icon: Phone,
-                  label: '+47 909 79 722',
-                  href: 'tel:+4790979722',
-                },
-                {
-                  icon: Mail,
-                  label: 'post@ba5apartments.com',
-                  href: 'mailto:post@ba5apartments.com',
-                },
+                { icon: MapPin, label: t('locationLabel'), href: 'https://maps.google.com/?q=Oslo+Norge' },
+                { icon: Phone, label: '+47 909 79 722', href: 'tel:+4790979722' },
+                { icon: Mail, label: 'post@ba5apartments.com', href: 'mailto:post@ba5apartments.com' },
               ].map(({ icon: I, label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  className="flex items-center gap-3 group"
-                >
+                <a key={label} href={href} className="flex items-center gap-3 group">
                   <div className="w-10 h-10 rounded-full bg-sage/10 flex items-center justify-center">
                     <I size={16} className="text-sage" />
                   </div>
@@ -100,16 +85,14 @@ export default function Contact() {
             {status === 'success' ? (
               <div className="flex flex-col items-center justify-center py-12 gap-3 text-center">
                 <CheckCircle size={40} className="text-sage" />
-                <p className="font-semibold text-ink">Meldingen er sendt!</p>
-                <p className="text-sm text-ink-light">
-                  Vi tar kontakt med deg snart.
-                </p>
+                <p className="font-semibold text-ink">{t('successTitle')}</p>
+                <p className="text-sm text-ink-light">{t('successText')}</p>
                 <button
                   type="button"
                   onClick={() => setStatus('idle')}
                   className="mt-4 text-sm text-sage underline underline-offset-2"
                 >
-                  Send en ny melding
+                  {t('successReset')}
                 </button>
               </div>
             ) : (
@@ -120,60 +103,26 @@ export default function Contact() {
                   tabIndex={-1}
                 >
                   <label htmlFor="website">Website</label>
-                  <input
-                    id="website"
-                    type="text"
-                    value={hp}
-                    onChange={e => setHp(e.target.value)}
-                    autoComplete="off"
-                    tabIndex={-1}
-                  />
+                  <input id="website" type="text" value={hp} onChange={e => setHp(e.target.value)} autoComplete="off" tabIndex={-1} />
                 </div>
 
                 <div className="space-y-4 mb-6">
                   <div>
-                    <label className="block text-xs font-medium text-ink-light mb-1.5">
-                      Navn *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={form.name}
-                      onChange={e => set('name', e.target.value)}
-                      className={inputCls}
-                    />
+                    <label className="block text-xs font-medium text-ink-light mb-1.5">{t('labelName')}</label>
+                    <input type="text" required value={form.name} onChange={e => set('name', e.target.value)} className={inputCls} />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-ink-light mb-1.5">
-                      E-post *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={form.email}
-                      onChange={e => set('email', e.target.value)}
-                      className={inputCls}
-                    />
+                    <label className="block text-xs font-medium text-ink-light mb-1.5">{t('labelEmail')}</label>
+                    <input type="email" required value={form.email} onChange={e => set('email', e.target.value)} className={inputCls} />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-ink-light mb-1.5">
-                      Melding *
-                    </label>
-                    <textarea
-                      required
-                      rows={4}
-                      value={form.message}
-                      onChange={e => set('message', e.target.value)}
-                      className={`${inputCls} resize-none`}
-                    />
+                    <label className="block text-xs font-medium text-ink-light mb-1.5">{t('labelMessage')}</label>
+                    <textarea required rows={4} value={form.message} onChange={e => set('message', e.target.value)} className={`${inputCls} resize-none`} />
                   </div>
                 </div>
 
                 {status === 'error' && (
-                  <p className="text-sm text-red-500 mb-4">
-                    Noe gikk galt. Prøv igjen eller send e-post direkte til
-                    post@ba5apartments.com
-                  </p>
+                  <p className="text-sm text-red-500 mb-4">{t('errorText')}</p>
                 )}
 
                 <button
@@ -182,11 +131,9 @@ export default function Contact() {
                   className="w-full flex items-center justify-center gap-2 bg-dark text-white py-3.5 rounded-xl text-sm font-semibold hover:bg-dark/80 transition-colors disabled:opacity-60"
                 >
                   {status === 'loading' ? (
-                    <>
-                      <Loader2 size={14} className="animate-spin" /> Sender...
-                    </>
+                    <><Loader2 size={14} className="animate-spin" /> {t('submitting')}</>
                   ) : (
-                    'Send melding'
+                    t('submit')
                   )}
                 </button>
               </>

@@ -1,26 +1,33 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { apartments } from '@/data/apartments'
+import { routing } from '@/i18n/routing'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import ApartmentPage from './ApartmentPage'
 
 interface Props {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string; locale: string }>
 }
 
 export function generateStaticParams() {
-  return apartments.map(a => ({ id: a.id }))
+  return routing.locales.flatMap(locale =>
+    apartments.map(a => ({ locale, id: a.id }))
+  )
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = await params
+  const { id, locale } = await params
   const apt = apartments.find(a => a.id === id)
   if (!apt) return {}
 
+  const t = await getTranslations({ locale, namespace: 'ApartmentPage' })
+  const inLabel = locale === 'no' ? 'i' : 'in'
+
   return {
-    title: `${apt.name} i ${apt.location} — BA5 Apartments`,
+    title: `${apt.name} ${inLabel} ${apt.location} — BA5 Apartments`,
     description: `${apt.description.slice(0, 155)}…`,
     openGraph: {
-      title: `${apt.name} i ${apt.location}`,
+      title: `${apt.name} ${inLabel} ${apt.location}`,
       description: apt.description.slice(0, 155),
       images: [{ url: apt.image, width: 1200, height: 900, alt: apt.name }],
       type: 'website',
@@ -29,7 +36,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }: Props) {
-  const { id } = await params
+  const { id, locale } = await params
+  setRequestLocale(locale)
+
   const apt = apartments.find(a => a.id === id)
   if (!apt) notFound()
 

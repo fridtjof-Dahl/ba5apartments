@@ -3,9 +3,11 @@
 import { useRef, useEffect, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { apartments } from '@/data/apartments'
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 
 export default function MapSection() {
+  const t = useTranslations('MapSection')
   const sectionRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<HTMLDivElement>(null)
   const mapInstance = useRef<any>(null)
@@ -77,14 +79,13 @@ export default function MapSection() {
           className="text-center mb-10"
         >
           <p className="text-sm font-medium text-ink-light tracking-wide mb-3">
-            Våre lokasjoner
+            {t('label')}
           </p>
           <h2 className="font-display text-3xl md:text-4xl text-ink mb-3">
-            Utforsk nabolagene
+            {t('heading')}
           </h2>
           <p className="text-ink-light max-w-lg mx-auto">
-            Alle våre leiligheter ligger i Oslos mest ettertraktede områder —
-            klikk på markørene for å utforske.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -126,13 +127,13 @@ export default function MapSection() {
                       href={`/apartments/${selectedApt.id}`}
                       className="bg-dark text-white text-xs font-semibold px-4 py-1.5 rounded-full hover:bg-dark/80 transition-colors"
                     >
-                      Se leilighet
+                      {t('viewApartment')}
                     </Link>
                     <button
                       onClick={() => setSelected(null)}
                       className="text-xs text-ink-faint hover:text-ink transition-colors"
                     >
-                      Lukk
+                      {t('close')}
                     </button>
                   </div>
                 </div>

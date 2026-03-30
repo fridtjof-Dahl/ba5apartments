@@ -2,8 +2,10 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 
 export default function About() {
+  const t = useTranslations('About')
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
@@ -18,28 +20,23 @@ export default function About() {
             transition={{ duration: 0.6 }}
           >
             <p className="text-sm font-medium text-ink-light tracking-wide mb-4">
-              Om BA5 Apartments
+              {t('label')}
             </p>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-ink leading-[1.15] mb-6">
-              Vi redefinerer hva det betyr å føle seg hjemme
+              {t('heading')}
             </h2>
             <p className="text-ink-light leading-relaxed mb-4">
-              BA5 Apartments er en del av BA5 Invest — et norsk eiendomsselskap
-              som kombinerer moderne design med varm gjestfrihet. Våre håndplukkede
-              leiligheter i Oslos fineste nabolag gir deg rommet til å slappe av,
-              jobbe og leve — med hotellets komfort og hjemmets varme.
+              {t('text1')}
             </p>
             <p className="text-ink-light leading-relaxed mb-8">
-              Enten du er i Oslo for forretninger, en kort ferie, eller et lengre
-              opphold, tilpasser vi oss dine behov. Hver leilighet er fullt møblert
-              og gjennomtenkt ned til minste detalj.
+              {t('text2')}
             </p>
             <a
               href="#apartments"
               className="inline-flex items-center gap-2.5 bg-dark text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-dark/80 transition-all"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
-              Utforsk leilighetene
+              {t('cta')}
               <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
             </a>
           </motion.div>
@@ -55,7 +52,7 @@ export default function About() {
                 <div className="rounded-3xl overflow-hidden aspect-[3/4]">
                   <img
                     src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80"
-                    alt="Leilighet interiør"
+                    alt={t('imgAlt1')}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -64,7 +61,7 @@ export default function About() {
                 <div className="rounded-3xl overflow-hidden aspect-[3/4]">
                   <img
                     src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80"
-                    alt="Leilighet stue"
+                    alt={t('imgAlt2')}
                     className="w-full h-full object-cover"
                   />
                 </div>

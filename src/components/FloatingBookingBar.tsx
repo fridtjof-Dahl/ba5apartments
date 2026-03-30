@@ -4,12 +4,14 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
 import type { Apartment } from '@/data/apartments'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   apt: Apartment
 }
 
 export default function FloatingBookingBar({ apt }: Props) {
+  const t = useTranslations('FloatingBookingBar')
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
@@ -75,7 +77,7 @@ export default function FloatingBookingBar({ apt }: Props) {
                     href="#booking-form"
                     className="bg-sage text-white text-xs font-semibold px-5 py-2.5 rounded-full"
                   >
-                    Book nå
+                    {t('bookNow')}
                   </a>
                 )}
               </div>

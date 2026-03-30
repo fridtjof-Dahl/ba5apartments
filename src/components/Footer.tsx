@@ -1,36 +1,38 @@
 'use client'
 
 import { useState } from 'react'
-
-const sitemap = [
-  {
-    title: 'BA5 Apartments',
-    links: [
-      { label: 'Leiligheter', href: '#apartments' },
-      { label: 'Om oss', href: '#about' },
-      { label: 'Anmeldelser', href: '#reviews' },
-      { label: 'FAQ', href: '#faq' },
-      { label: 'Kontakt', href: '#contact' },
-    ],
-  },
-  {
-    title: 'Booking',
-    links: [
-      { label: 'Book opphold', href: '#booking' },
-      { label: 'Bedriftsavtaler', href: '#contact' },
-    ],
-  },
-  {
-    title: 'Sosiale medier',
-    links: [
-      { label: 'Instagram', href: 'https://www.instagram.com/' },
-      { label: 'Facebook', href: 'https://www.facebook.com/' },
-    ],
-  },
-]
+import { useTranslations } from 'next-intl'
 
 export default function Footer() {
+  const t = useTranslations('Footer')
   const [email, setEmail] = useState('')
+
+  const sitemap = [
+    {
+      title: t('colApartments'),
+      links: [
+        { label: t('apartments'), href: '#apartments' },
+        { label: t('aboutUs'), href: '#about' },
+        { label: t('reviews'), href: '#reviews' },
+        { label: t('faq'), href: '#faq' },
+        { label: t('contact'), href: '#contact' },
+      ],
+    },
+    {
+      title: t('colBooking'),
+      links: [
+        { label: t('bookStay'), href: '#booking' },
+        { label: t('corporateDeals'), href: '#contact' },
+      ],
+    },
+    {
+      title: t('colSocial'),
+      links: [
+        { label: 'Instagram', href: 'https://www.instagram.com/' },
+        { label: 'Facebook', href: 'https://www.facebook.com/' },
+      ],
+    },
+  ]
 
   return (
     <footer className="bg-dark text-white pt-20 pb-10 px-6">
@@ -41,8 +43,7 @@ export default function Footer() {
               BA<span className="text-sage">5</span>
             </a>
             <p className="text-white/40 text-sm mt-4 max-w-xs leading-relaxed">
-              Håndplukkede, fullt møblerte leiligheter i Oslos fineste nabolag.
-              Hotellets komfort med hjemmets varme.
+              {t('blurb')}
             </p>
           </div>
 
@@ -69,15 +70,12 @@ export default function Footer() {
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <form
-            onSubmit={e => {
-              e.preventDefault()
-              setEmail('')
-            }}
+            onSubmit={e => { e.preventDefault(); setEmail('') }}
             className="flex items-center gap-3 w-full md:w-auto"
           >
             <input
               type="email"
-              placeholder="Din e-post"
+              placeholder={t('emailPlaceholder')}
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
@@ -87,13 +85,12 @@ export default function Footer() {
               type="submit"
               className="bg-white text-ink px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-white/90 transition-colors flex-shrink-0"
             >
-              Abonner
+              {t('subscribe')}
             </button>
           </form>
 
           <p className="text-white/30 text-xs">
-            &copy; {new Date().getFullYear()} BA5 Apartments. Alle rettigheter
-            reservert.
+            {t('copyright', { year: new Date().getFullYear() })}
           </p>
         </div>
       </div>

@@ -3,18 +3,21 @@
 import { useState, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-
-const links = [
-  { label: 'Leiligheter', href: '#apartments' },
-  { label: 'Om oss', href: '#about' },
-  { label: 'Anmeldelser', href: '#reviews' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Kontakt', href: '#contact' },
-]
+import { useTranslations } from 'next-intl'
+import LanguageSwitcher from './LanguageSwitcher'
 
 export default function Navbar() {
+  const t = useTranslations('Navbar')
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+
+  const links = [
+    { label: t('apartments'), href: '#apartments' },
+    { label: t('about'), href: '#about' },
+    { label: t('reviews'), href: '#reviews' },
+    { label: t('faq'), href: '#faq' },
+    { label: t('contact'), href: '#contact' },
+  ]
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40)
@@ -54,7 +57,8 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-3">
+            <LanguageSwitcher scrolled={scrolled} />
             <a
               href="#booking"
               className={`inline-flex items-center gap-2 text-[13px] font-semibold px-6 py-2.5 rounded-full transition-all ${
@@ -64,17 +68,20 @@ export default function Navbar() {
               }`}
             >
               <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40" />
-              Book ditt opphold
+              {t('bookCta')}
               <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40" />
             </a>
           </div>
 
-          <button
-            onClick={() => setOpen(!open)}
-            className={`md:hidden ${scrolled ? 'text-ink' : 'text-white'}`}
-          >
-            {open ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          <div className="flex md:hidden items-center gap-2">
+            <LanguageSwitcher scrolled={scrolled} />
+            <button
+              onClick={() => setOpen(!open)}
+              className={scrolled ? 'text-ink' : 'text-white'}
+            >
+              {open ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -109,7 +116,7 @@ export default function Navbar() {
               className="mt-6 inline-flex items-center gap-2 bg-white text-ink px-8 py-3 rounded-full text-sm font-semibold"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-ink/40" />
-              Book ditt opphold
+              {t('bookCta')}
               <span className="w-1.5 h-1.5 rounded-full bg-ink/40" />
             </a>
           </motion.div>

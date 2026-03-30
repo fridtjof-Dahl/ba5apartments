@@ -2,17 +2,19 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-
-const stats = [
-  { value: '4.9', label: 'Gjennomsnittlig gjestekarakter' },
-  { value: '500+', label: 'Fornøyde gjester' },
-  { value: '7', label: 'Stilfullt innredede leiligheter' },
-  { value: '365', label: 'Dager med personlig service' },
-]
+import { useTranslations } from 'next-intl'
 
 export default function Stats() {
+  const t = useTranslations('Stats')
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
+
+  const stats = [
+    { value: t('stat1Value'), label: t('stat1Label') },
+    { value: t('stat2Value'), label: t('stat2Label') },
+    { value: t('stat3Value'), label: t('stat3Label') },
+    { value: t('stat4Value'), label: t('stat4Label') },
+  ]
 
   return (
     <section className="py-20 md:py-28 px-6">
@@ -25,11 +27,10 @@ export default function Stats() {
           className="text-center mb-14"
         >
           <p className="text-sm font-medium text-ink-light tracking-wide mb-4">
-            Tall som snakker for seg selv
+            {t('label')}
           </p>
           <h3 className="font-display text-xl md:text-2xl text-ink max-w-xl mx-auto leading-relaxed">
-            Fra enestående gjestetilfredshet til gjennomtenkte leiligheter og
-            service døgnet rundt.
+            {t('heading')}
           </h3>
         </motion.div>
 

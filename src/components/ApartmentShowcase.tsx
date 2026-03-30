@@ -4,9 +4,10 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { apartments } from '@/data/apartments'
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 
-function Card({ apt, i }: { apt: (typeof apartments)[0]; i: number }) {
+function Card({ apt, i, viewLabel }: { apt: (typeof apartments)[0]; i: number; viewLabel: string }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
@@ -37,7 +38,7 @@ function Card({ apt, i }: { apt: (typeof apartments)[0]; i: number }) {
             {apt.description}
           </p>
           <span className="inline-flex items-center gap-1.5 text-ink text-sm font-medium group-hover:gap-2.5 transition-all">
-            Se tilgjengelighet
+            {viewLabel}
             <ArrowRight size={14} />
           </span>
         </div>
@@ -47,6 +48,7 @@ function Card({ apt, i }: { apt: (typeof apartments)[0]; i: number }) {
 }
 
 export default function ApartmentShowcase() {
+  const t = useTranslations('ApartmentShowcase')
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
@@ -61,17 +63,16 @@ export default function ApartmentShowcase() {
           className="text-center mb-14"
         >
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-ink mb-4">
-            Bo på din måte
+            {t('heading')}
           </h2>
           <p className="text-ink-light max-w-lg mx-auto">
-            Enten du søker ro, sentral beliggenhet eller litt ekstra luksus —
-            BA5 har den perfekte leiligheten for ditt opphold.
+            {t('subtitle')}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {apartments.slice(0, 6).map((apt, i) => (
-            <Card key={apt.id} apt={apt} i={i} />
+            <Card key={apt.id} apt={apt} i={i} viewLabel={t('viewAvailability')} />
           ))}
         </div>
 
@@ -86,7 +87,7 @@ export default function ApartmentShowcase() {
             className="inline-flex items-center gap-2.5 bg-dark text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-dark/80 transition-all"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
-            Se alle leiligheter
+            {t('viewAll')}
             <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
           </a>
         </motion.div>

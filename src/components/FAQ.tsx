@@ -3,43 +3,9 @@
 import { useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Plus, Minus } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
-const faqs = [
-  {
-    q: 'Hvordan fungerer innsjekking?',
-    a: 'Vi bruker smart lås med digital kode som du mottar på SMS/e-post 24 timer før ankomst. Sjekk inn når det passer deg — ingen nøkkeloverlevering nødvendig. Detaljerte instruksjoner sendes automatisk.',
-  },
-  {
-    q: 'Hva er avbestillingsreglene?',
-    a: 'Gratis avbestilling opptil 48 timer før innsjekk. Ved avbestilling etter dette faktureres 50 % av totalbeløpet. Vi er fleksible — ta kontakt med oss ved spesielle omstendigheter.',
-  },
-  {
-    q: 'Tilbyr dere bedriftsavtaler?',
-    a: 'Absolutt! Vi har skreddersydde løsninger for bedrifter med faste priser, fakturering og prioritert tilgjengelighet. Kontakt oss for et tilbud tilpasset deres behov.',
-  },
-  {
-    q: 'Er leilighetene møblerte?',
-    a: 'Alle leiligheter er fullt møblerte med alt du trenger — fra sengetøy og håndklær til kjøkkenutstyr, WiFi og vaskemuligheter. Du trenger bare å ta med deg selv.',
-  },
-  {
-    q: 'Hvor lang er minimum opphold?',
-    a: 'Minimum opphold er 1 natt for de fleste leiligheter. Vi tilbyr også gunstige priser for lengre opphold (uke- og månedsopphold). Kontakt oss for tilpassede priser.',
-  },
-  {
-    q: 'Hvordan holder dere leilighetene rene?',
-    a: 'Profesjonell rengjøring mellom hvert opphold, med fokus på hygiene og kvalitet. Ekstra rengjøring kan bestilles under oppholdet. Vi følger strenge rengjøringsprotokoller.',
-  },
-  {
-    q: 'Kan jeg ta med kjæledyr?',
-    a: 'Noen av våre leiligheter er dyrevennlige — ta kontakt med oss for å finne den rette leiligheten for deg og din firbeinte venn. Et lite tillegg for ekstra rengjøring kan påløpe.',
-  },
-  {
-    q: 'Tilbyr dere parkering?',
-    a: 'Gateparkering er tilgjengelig i de fleste nabolag. Noen leiligheter har også tilgang til privat parkering mot et tillegg. Vi hjelper gjerne med å finne løsninger.',
-  },
-]
-
-function FaqItem({ faq, isOpen, toggle }: { faq: typeof faqs[0]; isOpen: boolean; toggle: () => void }) {
+function FaqItem({ q, a, isOpen, toggle }: { q: string; a: string; isOpen: boolean; toggle: () => void }) {
   return (
     <div className="border-b border-gray-100 last:border-b-0">
       <button
@@ -47,7 +13,7 @@ function FaqItem({ faq, isOpen, toggle }: { faq: typeof faqs[0]; isOpen: boolean
         className="w-full flex items-start justify-between py-5 text-left group"
       >
         <span className="font-medium text-ink text-[15px] pr-8 group-hover:text-sage transition-colors">
-          {faq.q}
+          {q}
         </span>
         <span className="mt-0.5 text-ink-faint group-hover:text-sage transition-colors flex-shrink-0">
           {isOpen ? <Minus size={18} /> : <Plus size={18} />}
@@ -63,7 +29,7 @@ function FaqItem({ faq, isOpen, toggle }: { faq: typeof faqs[0]; isOpen: boolean
             className="overflow-hidden"
           >
             <p className="text-ink-light text-sm leading-relaxed pb-5 pr-10">
-              {faq.a}
+              {a}
             </p>
           </motion.div>
         )}
@@ -73,9 +39,15 @@ function FaqItem({ faq, isOpen, toggle }: { faq: typeof faqs[0]; isOpen: boolean
 }
 
 export default function FAQ() {
+  const t = useTranslations('FAQ')
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const [openIndex, setOpenIndex] = useState<number | null>(0)
+
+  const faqs = Array.from({ length: 8 }, (_, i) => ({
+    q: t(`q${i + 1}`),
+    a: t(`a${i + 1}`),
+  }))
 
   return (
     <section id="faq" className="py-24 md:py-32 px-6 bg-sand">
@@ -88,21 +60,20 @@ export default function FAQ() {
             transition={{ duration: 0.5 }}
           >
             <p className="text-sm font-medium text-ink-light tracking-wide mb-3">
-              Ofte stilte spørsmål
+              {t('label')}
             </p>
             <h2 className="font-display text-3xl md:text-4xl text-ink mb-4">
-              Alt du trenger å vite
+              {t('heading')}
             </h2>
             <p className="text-ink-light leading-relaxed mb-8 max-w-md">
-              Finner du ikke svaret du leter etter? Ta gjerne kontakt med oss
-              — vi svarer raskt og er alltid klare til å hjelpe.
+              {t('subtitle')}
             </p>
             <a
               href="#contact"
               className="inline-flex items-center gap-2.5 bg-dark text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-dark/80 transition-all"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
-              Kontakt oss
+              {t('cta')}
             </a>
           </motion.div>
 
@@ -115,7 +86,8 @@ export default function FAQ() {
             {faqs.map((faq, i) => (
               <FaqItem
                 key={i}
-                faq={faq}
+                q={faq.q}
+                a={faq.a}
                 isOpen={openIndex === i}
                 toggle={() => setOpenIndex(openIndex === i ? null : i)}
               />

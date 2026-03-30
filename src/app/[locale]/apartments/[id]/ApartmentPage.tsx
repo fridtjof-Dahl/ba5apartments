@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 import { MapPin, Users, Maximize, ArrowLeft, Check, Loader2, CheckCircle, ExternalLink, Star } from 'lucide-react'
 import type { Apartment } from '@/data/apartments'
@@ -9,6 +8,8 @@ import HostawayWidget from '@/components/HostawayWidget'
 import ImageGallery from '@/components/ImageGallery'
 import NeighborhoodGuide from '@/components/NeighborhoodGuide'
 import FloatingBookingBar from '@/components/FloatingBookingBar'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 
 interface Props {
   apt: Apartment
@@ -16,6 +17,7 @@ interface Props {
 }
 
 export default function ApartmentPage({ apt, others }: Props) {
+  const t = useTranslations('ApartmentPage')
   const [loadedAt] = useState(() => Date.now())
   const [hp, setHp] = useState('')
   const [form, setForm] = useState({ name: '', email: '', checkIn: '', checkOut: '', guests: '2' })
@@ -51,7 +53,7 @@ export default function ApartmentPage({ apt, others }: Props) {
           </Link>
           <Link href="/#apartments" className="flex items-center gap-1.5 text-sm text-ink-light hover:text-ink transition-colors">
             <ArrowLeft size={15} />
-            Alle leiligheter
+            {t('allApartments')}
           </Link>
         </div>
       </header>
@@ -92,9 +94,9 @@ export default function ApartmentPage({ apt, others }: Props) {
             <div className="flex flex-wrap gap-6 pb-8 border-b border-gray-100 mb-8">
               {[
                 { icon: Maximize, label: apt.size },
-                { icon: Users, label: `${apt.guests} gjester` },
+                { icon: Users, label: t('guests', { count: apt.guests }) },
                 { icon: MapPin, label: apt.area },
-                { icon: Star, label: '5.0 rating' },
+                { icon: Star, label: t('rating') },
               ].map(({ icon: I, label }) => (
                 <div key={label} className="flex items-center gap-2 text-ink-light text-sm">
                   <I size={16} className="text-sage" />
@@ -103,10 +105,10 @@ export default function ApartmentPage({ apt, others }: Props) {
               ))}
             </div>
 
-            <h2 className="font-display text-xl text-ink mb-3">Om leiligheten</h2>
+            <h2 className="font-display text-xl text-ink mb-3">{t('aboutHeading')}</h2>
             <p className="text-ink-light leading-relaxed mb-10">{apt.description}</p>
 
-            <h2 className="font-display text-xl text-ink mb-4">Fasiliteter</h2>
+            <h2 className="font-display text-xl text-ink mb-4">{t('amenitiesHeading')}</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
               {apt.features.map(f => (
                 <div key={f} className="flex items-center gap-2 text-sm text-ink-light">
@@ -128,9 +130,9 @@ export default function ApartmentPage({ apt, others }: Props) {
             <div id="booking-form" className="sticky top-20 space-y-4">
               {hasExternalBooking && (
                 <div className="bg-sand rounded-3xl p-6 md:p-8">
-                  <h3 className="font-display text-xl text-ink mb-2">Book direkte</h3>
+                  <h3 className="font-display text-xl text-ink mb-2">{t('bookDirect')}</h3>
                   <p className="text-sm text-ink-light mb-5">
-                    Book trygt gjennom våre partnere med umiddelbar bekreftelse.
+                    {t('bookDirectDesc')}
                   </p>
                   <div className="space-y-3">
                     {apt.bookingComUrl && (
@@ -142,7 +144,7 @@ export default function ApartmentPage({ apt, others }: Props) {
                       >
                         <span className="flex items-center gap-2.5">
                           <span className="w-2.5 h-2.5 rounded-full bg-[#003580]" />
-                          Book på Booking.com
+                          {t('bookOnBooking')}
                         </span>
                         <ExternalLink size={14} className="text-ink-faint group-hover:text-[#003580] transition-colors" />
                       </a>
@@ -156,7 +158,7 @@ export default function ApartmentPage({ apt, others }: Props) {
                       >
                         <span className="flex items-center gap-2.5">
                           <span className="w-2.5 h-2.5 rounded-full bg-[#FF5A5F]" />
-                          Book på Airbnb
+                          {t('bookOnAirbnb')}
                         </span>
                         <ExternalLink size={14} className="text-ink-faint group-hover:text-[#FF5A5F] transition-colors" />
                       </a>
@@ -169,20 +171,20 @@ export default function ApartmentPage({ apt, others }: Props) {
                 {status === 'success' ? (
                   <div className="flex flex-col items-center py-8 gap-3 text-center">
                     <CheckCircle size={40} className="text-sage" />
-                    <p className="font-semibold text-ink">Forespørsel sendt!</p>
-                    <p className="text-sm text-ink-light">Vi tar kontakt på e-post innen kort tid.</p>
+                    <p className="font-semibold text-ink">{t('successTitle')}</p>
+                    <p className="text-sm text-ink-light">{t('successText')}</p>
                     <button onClick={() => setStatus('idle')} className="mt-3 text-sm text-sage underline">
-                      Send ny forespørsel
+                      {t('successReset')}
                     </button>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit}>
                     <h3 className="font-display text-xl text-ink mb-1">
-                      {hasExternalBooking ? 'Eller send forespørsel' : `Book ${apt.name}`}
+                      {hasExternalBooking ? t('formTitleExternal') : t('formTitleDirect', { name: apt.name })}
                     </h3>
                     {hasExternalBooking && (
                       <p className="text-xs text-ink-light mb-4">
-                        Har du spesielle ønsker? Send oss en forespørsel direkte.
+                        {t('formSubtitle')}
                       </p>
                     )}
                     <div aria-hidden="true" className="absolute opacity-0 h-0 overflow-hidden pointer-events-none" tabIndex={-1}>
@@ -191,40 +193,40 @@ export default function ApartmentPage({ apt, others }: Props) {
 
                     <div className="space-y-3 mb-5">
                       <div>
-                        <label className="block text-xs font-medium text-ink-light mb-1.5">Navn</label>
-                        <input type="text" required value={form.name} onChange={e => set('name', e.target.value)} className={inputCls} placeholder="Ola Nordmann" />
+                        <label className="block text-xs font-medium text-ink-light mb-1.5">{t('labelName')}</label>
+                        <input type="text" required value={form.name} onChange={e => set('name', e.target.value)} className={inputCls} placeholder={t('placeholderName')} />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-ink-light mb-1.5">E-post</label>
-                        <input type="email" required value={form.email} onChange={e => set('email', e.target.value)} className={inputCls} placeholder="ola@eksempel.no" />
+                        <label className="block text-xs font-medium text-ink-light mb-1.5">{t('labelEmail')}</label>
+                        <input type="email" required value={form.email} onChange={e => set('email', e.target.value)} className={inputCls} placeholder={t('placeholderEmail')} />
                       </div>
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs font-medium text-ink-light mb-1.5">Innsjekk</label>
+                          <label className="block text-xs font-medium text-ink-light mb-1.5">{t('labelCheckIn')}</label>
                           <input type="date" required value={form.checkIn} onChange={e => set('checkIn', e.target.value)} className={inputCls} min={new Date().toISOString().split('T')[0]} />
                         </div>
                         <div>
-                          <label className="block text-xs font-medium text-ink-light mb-1.5">Utsjekk</label>
+                          <label className="block text-xs font-medium text-ink-light mb-1.5">{t('labelCheckOut')}</label>
                           <input type="date" required value={form.checkOut} onChange={e => set('checkOut', e.target.value)} className={inputCls} min={form.checkIn || new Date().toISOString().split('T')[0]} />
                         </div>
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-ink-light mb-1.5">Gjester</label>
+                        <label className="block text-xs font-medium text-ink-light mb-1.5">{t('labelGuests')}</label>
                         <select value={form.guests} onChange={e => set('guests', e.target.value)} className={inputCls}>
-                          {[1, 2, 3, 4].map(n => <option key={n} value={n}>{n} {n === 1 ? 'gjest' : 'gjester'}</option>)}
+                          {[1, 2, 3, 4].map(n => <option key={n} value={n}>{t('guest', { count: n })}</option>)}
                         </select>
                       </div>
                     </div>
 
                     {status === 'error' && (
-                      <p className="text-xs text-red-500 mb-3">Noe gikk galt. Prøv igjen.</p>
+                      <p className="text-xs text-red-500 mb-3">{t('errorText')}</p>
                     )}
 
                     <button type="submit" disabled={status === 'loading'}
                       className="w-full flex items-center justify-center gap-2 bg-sage text-white py-3.5 rounded-xl text-sm font-semibold hover:bg-sage-light transition-colors disabled:opacity-60">
-                      {status === 'loading' ? <><Loader2 size={14} className="animate-spin" />Sender...</> : 'Send bookingforespørsel'}
+                      {status === 'loading' ? <><Loader2 size={14} className="animate-spin" />{t('submitting')}</> : t('submit')}
                     </button>
-                    <p className="text-center text-ink-faint text-xs mt-3">Gratis avbestilling opptil 48 timer før innsjekk</p>
+                    <p className="text-center text-ink-faint text-xs mt-3">{t('cancellationNote')}</p>
                   </form>
                 )}
               </div>
@@ -234,7 +236,7 @@ export default function ApartmentPage({ apt, others }: Props) {
 
         {others.length > 0 && (
           <div className="mt-16 pt-12 border-t border-gray-100">
-            <h2 className="font-display text-2xl text-ink mb-8">Andre leiligheter</h2>
+            <h2 className="font-display text-2xl text-ink mb-8">{t('otherApartments')}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {others.map(o => (
                 <Link key={o.id} href={`/apartments/${o.id}`} className="group block">
@@ -251,7 +253,7 @@ export default function ApartmentPage({ apt, others }: Props) {
                     <MapPin size={11} />{o.location}
                   </div>
                   <p className="font-display text-ink">{o.name}</p>
-                  <p className="text-xs text-ink-light mt-0.5">{o.size} · {o.guests} gjester</p>
+                  <p className="text-xs text-ink-light mt-0.5">{o.size} · {t('guests', { count: o.guests })}</p>
                 </Link>
               ))}
             </div>

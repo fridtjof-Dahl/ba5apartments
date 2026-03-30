@@ -4,20 +4,21 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Shield, Sparkles, Key, Wifi, Clock, Building2 } from 'lucide-react'
 import { testimonials } from '@/data/apartments'
+import { useTranslations } from 'next-intl'
 
-const amenities = [
-  { icon: Shield, title: 'Trygt & forsikret', desc: 'Alle opphold er dekket av forsikring og sikker innsjekking.' },
-  { icon: Sparkles, title: 'Profesjonelt rengjort', desc: 'Grundig rengjøring mellom hvert opphold — alltid ferskt.' },
-  { icon: Key, title: 'Selvinnsjekking', desc: 'Fleksibel ankomst med smart lås og digital nøkkel.' },
-  { icon: Wifi, title: 'Gratis WiFi', desc: 'Høyhastighets internett i alle leiligheter.' },
-  { icon: Clock, title: 'Fleksible opphold', desc: 'Kort ferie, jobbreise eller lengre perioder.' },
-  { icon: Building2, title: 'Bedriftsavtaler', desc: 'Skreddersydde løsninger for bedrifter i Oslo.' },
-]
+const icons = [Shield, Sparkles, Key, Wifi, Clock, Building2]
 
 export default function Features() {
+  const t = useTranslations('Features')
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const featured = testimonials[0]
+
+  const amenities = icons.map((icon, i) => ({
+    icon,
+    title: t(`amenity${i + 1}Title`),
+    desc: t(`amenity${i + 1}Desc`),
+  }))
 
   return (
     <section className="py-24 md:py-32 px-6 bg-dark text-white">
@@ -30,14 +31,12 @@ export default function Features() {
           className="text-center mb-16"
         >
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.15] mb-5">
-            Hver detalj er designet for
+            {t('heading1')}
             <br className="hidden md:block" />
-            å løfte opplevelsen din
+            {t('heading2')}
           </h2>
           <p className="text-white/50 max-w-xl mx-auto leading-relaxed">
-            Fra trygg innsjekking og profesjonelt renhold til fleksible opphold
-            og gjennomtenkte interiører — alt er tilrettelagt for at du skal
-            føle deg hjemme.
+            {t('subtitle')}
           </p>
         </motion.div>
 

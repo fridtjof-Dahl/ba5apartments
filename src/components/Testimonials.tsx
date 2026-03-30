@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
 import { testimonials as staticReviews } from '@/data/apartments'
+import { useTranslations } from 'next-intl'
 
 interface Review {
   id: number
@@ -63,15 +64,16 @@ function ReviewCard({ review }: { review: Review }) {
 }
 
 export default function Testimonials() {
+  const t = useTranslations('Testimonials')
   const sectionRef = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const inView = useInView(sectionRef, { once: true, margin: '-60px' })
-  const initialReviews: Review[] = staticReviews.map((t, i) => ({
+  const initialReviews: Review[] = staticReviews.map((r, i) => ({
     id: i + 1,
-    text: t.text,
-    author: t.author,
-    rating: t.rating,
-    source: t.source,
+    text: r.text,
+    author: r.author,
+    rating: r.rating,
+    source: r.source,
     listingName: '',
     date: '',
   }))
@@ -121,10 +123,10 @@ export default function Testimonials() {
         >
           <div>
             <p className="text-sm font-medium text-ink-light tracking-wide mb-3">
-              Gjestenes ord
+              {t('label')}
             </p>
             <h2 className="font-display text-3xl md:text-4xl text-ink mb-3">
-              {reviews.length}+ verifiserte anmeldelser
+              {t('reviewCount', { count: reviews.length })}
             </h2>
             <div className="flex items-center gap-4 flex-wrap">
               <div className="flex items-center gap-2">
@@ -136,12 +138,12 @@ export default function Testimonials() {
               <div className="flex gap-2">
                 {airbnbCount > 0 && (
                   <span className="text-xs text-ink-light">
-                    {airbnbCount} fra Airbnb
+                    {t('fromAirbnb', { count: airbnbCount })}
                   </span>
                 )}
                 {bookingCount > 0 && (
                   <span className="text-xs text-ink-light">
-                    · {bookingCount} fra Booking.com
+                    {t('fromBooking', { count: bookingCount })}
                   </span>
                 )}
               </div>
@@ -195,7 +197,7 @@ export default function Testimonials() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-white border border-gray-200 px-5 py-2.5 rounded-full text-sm text-ink-light hover:border-[#FF5A5F] hover:text-[#FF5A5F] transition-colors"
           >
-            Se anmeldelser på Airbnb
+            {t('viewAirbnb')}
           </a>
           <a
             href="https://www.booking.com/hotel/no/newly-renovated-studio-apartment-at-frogner.html"
@@ -203,7 +205,7 @@ export default function Testimonials() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-white border border-gray-200 px-5 py-2.5 rounded-full text-sm text-ink-light hover:border-[#003580] hover:text-[#003580] transition-colors"
           >
-            Se anmeldelser på Booking.com
+            {t('viewBooking')}
           </a>
         </motion.div>
       </div>

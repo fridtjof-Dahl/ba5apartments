@@ -2,6 +2,7 @@
 
 import { MapPin, Coffee, ShoppingBag, Train, TreePine, UtensilsCrossed, Landmark } from 'lucide-react'
 import type { Apartment } from '@/data/apartments'
+import { useTranslations } from 'next-intl'
 
 const typeIcons: Record<string, any> = {
   Restaurant: UtensilsCrossed,
@@ -24,17 +25,19 @@ interface Props {
 }
 
 export default function NeighborhoodGuide({ neighborhood, location }: Props) {
+  const t = useTranslations('NeighborhoodGuide')
+
   return (
     <div className="mt-12 pt-10 border-t border-gray-100">
       <div className="flex items-start justify-between mb-6">
         <div>
           <h2 className="font-display text-xl text-ink mb-1">
-            Nabolaget — {location}
+            {t('heading', { location })}
           </h2>
           <p className="text-ink-light text-sm">{neighborhood.vibe}</p>
         </div>
         <div className="bg-sage/10 text-sage text-xs font-bold px-3 py-1.5 rounded-full flex-shrink-0">
-          Walk Score: {neighborhood.walkScore}
+          {t('walkScore', { score: neighborhood.walkScore })}
         </div>
       </div>
 
