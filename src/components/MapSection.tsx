@@ -66,6 +66,21 @@ export default function MapSection() {
     })
   }, [])
 
+  const uniqueAreas = (() => {
+    const seen = new Map<string, [number, number][]>()
+    for (const apt of apartments) {
+      if (!seen.has(apt.area)) seen.set(apt.area, [])
+      seen.get(apt.area)!.push(apt.coordinates)
+    }
+    return [...seen.entries()].map(([name, coords]) => ({
+      name,
+      center: [
+        coords.reduce((s, c) => s + c[0], 0) / coords.length,
+        coords.reduce((s, c) => s + c[1], 0) / coords.length,
+      ] as [number, number],
+    }))
+  })()
+
   const selectedApt = apartments.find(a => a.id === selected)
 
   return (
@@ -143,26 +158,29 @@ export default function MapSection() {
         </motion.div>
 
         <div className="flex flex-wrap justify-center gap-2 mt-6">
-          {apartments.map(apt => (
-            <button
-              key={apt.id}
-              onClick={() => {
-                setSelected(apt.id)
-                if (mapInstance.current) {
-                  mapInstance.current.flyTo(apt.coordinates, 15, {
-                    duration: 0.8,
-                  })
-                }
-              }}
-              className={`text-xs px-4 py-2 rounded-full border transition-all ${
-                selected === apt.id
-                  ? 'bg-dark text-white border-dark'
-                  : 'bg-white text-ink-light border-gray-200 hover:border-dark hover:text-ink'
-              }`}
-            >
-              {apt.location}
-            </button>
-          ))}
+          {uniqueAreas.map(area => {
+            const areaApts = apartments.filter(a => a.area === area.name)
+            const isActive = selectedApt && selectedApt.area === area.name
+            return (
+              <button
+                key={area.name}
+                onClick={() => {
+                  const first = areaApts[0]
+                  setSelected(first.id)
+                  if (mapInstance.current) {
+                    mapInstance.current.flyTo(area.center, 15, { duration: 0.8 })
+                  }
+                }}
+                className={`text-xs px-4 py-2 rounded-full border transition-all ${
+                  isActive
+                    ? 'bg-dark text-white border-dark'
+                    : 'bg-white text-ink-light border-gray-200 hover:border-dark hover:text-ink'
+                }`}
+              >
+                {area.name} · {areaApts.length}
+              </button>
+            )
+          })}
         </div>
       </div>
     </section>
