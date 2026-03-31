@@ -200,7 +200,7 @@ export default function Testimonials() {
             {t('viewAirbnb')}
           </a>
           <a
-            href="https://www.booking.com/hotel/no/newly-renovated-studio-apartment-at-frogner.html"
+            href="https://www.booking.com"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-white border border-gray-200 px-5 py-2.5 rounded-full text-sm text-ink-light hover:border-[#003580] hover:text-[#003580] transition-colors"

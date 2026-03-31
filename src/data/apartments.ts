@@ -49,6 +49,8 @@ export const apartments: Apartment[] = [
       '/images/apartments/frogner-deluxe-4.jpg',
     ],
     bookingUrl: '/booking',
+    bookingComUrl:
+      'https://www.booking.com/hotel/no/oslo-vest-hostel.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/1120844328872172996',
     coordinates: [59.9212, 10.7055],
     neighborhood: {
@@ -83,6 +85,8 @@ export const apartments: Apartment[] = [
       '/images/apartments/frogner-deluxe-twin-4.jpg',
     ],
     bookingUrl: '/booking',
+    bookingComUrl:
+      'https://www.booking.com/hotel/no/oslo-vest-hostel.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/1128471679055477602',
     coordinates: [59.9214, 10.7048],
     neighborhood: {
@@ -117,6 +121,8 @@ export const apartments: Apartment[] = [
       '/images/apartments/frogner-king-4.jpg',
     ],
     bookingUrl: '/booking',
+    bookingComUrl:
+      'https://www.booking.com/hotel/no/oslo-vest-hostel.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/1128255688957410984',
     coordinates: [59.9210, 10.7060],
     neighborhood: {
@@ -151,6 +157,8 @@ export const apartments: Apartment[] = [
       '/images/apartments/frogner-cozy-4.jpg',
     ],
     bookingUrl: '/booking',
+    bookingComUrl:
+      'https://www.booking.com/hotel/no/oslo-vest-hostel.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/1128482433296477360',
     coordinates: [59.9208, 10.7052],
     neighborhood: {
@@ -186,6 +194,7 @@ export const apartments: Apartment[] = [
       '/images/apartments/solli-deluxe-4.jpg',
     ],
     bookingUrl: '/booking',
+    bookingComUrl: 'https://www.booking.com/hotel/no/oslo-living.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/1608802267894604295',
     coordinates: [59.9175, 10.7225],
     neighborhood: {
@@ -220,6 +229,7 @@ export const apartments: Apartment[] = [
       '/images/apartments/solli-standard-4.jpg',
     ],
     bookingUrl: '/booking',
+    bookingComUrl: 'https://www.booking.com/hotel/no/oslo-living.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/1618930459639956189',
     coordinates: [59.9178, 10.7228],
     neighborhood: {
@@ -254,6 +264,7 @@ export const apartments: Apartment[] = [
       '/images/apartments/solli-superior-4.jpg',
     ],
     bookingUrl: '/booking',
+    bookingComUrl: 'https://www.booking.com/hotel/no/oslo-living.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/1618928837680777693',
     coordinates: [59.9173, 10.7222],
     neighborhood: {
@@ -287,6 +298,7 @@ export const apartments: Apartment[] = [
       '/images/apartments/solli-twin-4.jpg',
     ],
     bookingUrl: '/booking',
+    bookingComUrl: 'https://www.booking.com/hotel/no/oslo-living.html',
     airbnbUrl: 'https://www.airbnb.no/rooms/1608860070415458572',
     coordinates: [59.9176, 10.7220],
     neighborhood: {
@@ -323,6 +335,8 @@ export const apartments: Apartment[] = [
       '/images/apartments/bygdoy-apartment-4.jpg',
     ],
     bookingUrl: '/booking',
+    bookingComUrl:
+      'https://www.booking.com/hotel/no/apartment-on-idyllic-bygdoy-with-free-parking.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/703426062508620510',
     coordinates: [59.9060, 10.6830],
     neighborhood: {
@@ -358,7 +372,8 @@ export const apartments: Apartment[] = [
       '/images/apartments/frogner-studio-4.jpg',
     ],
     bookingUrl: '/booking',
-    bookingComUrl: 'https://www.booking.com/hotel/no/newly-renovated-studio-apartment-at-frogner.html',
+    bookingComUrl:
+      'https://www.booking.com/hotel/no/studio-apartment-in-central-oslo.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/769496684949345924',
     coordinates: [59.9210, 10.7050],
     neighborhood: {
@@ -392,6 +407,8 @@ export const apartments: Apartment[] = [
       '/images/apartments/majorstuen-apartment-4.jpg',
     ],
     bookingUrl: '/booking',
+    bookingComUrl:
+      'https://www.booking.com/hotel/no/elegant-apartment-with-a-central-location-in-oslo.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/1293443667533494630',
     coordinates: [59.9295, 10.7145],
     neighborhood: {
@@ -413,7 +430,7 @@ export const apartments: Apartment[] = [
     reviews: 27,
     superhost: true,
     location: 'Central Oslo',
-    area: 'Solli',
+    area: 'Solli Plass',
     size: '30 sqm',
     guests: '1–2',
     description:
@@ -427,6 +444,8 @@ export const apartments: Apartment[] = [
       '/images/apartments/central-renovated-4.jpg',
     ],
     bookingUrl: '/booking',
+    bookingComUrl:
+      'https://www.booking.com/hotel/no/stylish-newly-renovated-apartment-in-central-oslo.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/1505110456312265614',
     coordinates: [59.9175, 10.7230],
     neighborhood: {
