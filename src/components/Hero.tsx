@@ -28,7 +28,7 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen bg-gradient-to-b from-dark via-dark/95 to-sand overflow-hidden">
-      <div className="absolute inset-0 bg-[url('/images/hero.avif')] bg-cover bg-center opacity-30" />
+      <div className="absolute inset-0 bg-[url('/images/hero2.avif')] bg-cover bg-center opacity-30" />
 
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">
         <motion.h1
