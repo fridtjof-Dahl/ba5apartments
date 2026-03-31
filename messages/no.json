@@ -101,16 +101,7 @@
     "tagBathroom": "Bad",
     "tagExterior": "Eksteriør",
     "viewAll": "Se alle leiligheter",
-    "img1Alt": "Lys og luftig stue med klassisk interiør",
-    "img2Alt": "Moderne fasade med grønne omgivelser",
-    "img3Alt": "Stilrent soverom med dobbeltseng",
-    "img4Alt": "Moderne åpen stue med sofa",
-    "img5Alt": "Minimalistisk stue med naturlig lys",
-    "img6Alt": "Luksuriøst bad med moderne detaljer",
-    "img7Alt": "Koselig stue med terrasse-tilgang",
-    "img8Alt": "Kompakt og stilfullt kjøkken",
-    "img9Alt": "Lyst soverom med utsikt",
-    "img10Alt": "Romslig stue med spiseplass"
+    "imageAlt": "Bilde av {name}, {location}"
   },
   "Testimonials": {
     "label": "Gjestenes ord",
@@ -237,22 +228,6 @@
   "NeighborhoodGuide": {
     "heading": "Nabolaget — {location}",
     "walkScore": "Walk Score: {score}"
-  },
-  "WhyBA5": {
-    "label": "Hvorfor BA5?",
-    "heading": "Det beste fra to verdener",
-    "subtitle": "Vi kombinerer hotellets komfort og service med rommet og friheten til en privat leilighet.",
-    "feature": "Egenskap",
-    "hotel": "Hotell",
-    "fullKitchen": "Fullt utstyrt kjøkken",
-    "selfCheckIn": "Fleksibel selvinnsjekking",
-    "washer": "Vaskemaskin og tørketrommel",
-    "proClean": "Profesjonell rengjøring",
-    "localArea": "Autentisk nabolagsfølelse",
-    "freeCancellation": "Gratis avbestilling",
-    "privateSpace": "Ditt eget private rom",
-    "support247": "24/7 vertsstøtte",
-    "disclaimer": "Sammenligning basert på typiske tilbud. Faktiske fasiliteter kan variere."
   },
   "ImageGallery": {
     "mainImage": "{name} — hovedbilde",

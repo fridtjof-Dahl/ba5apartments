@@ -34,7 +34,7 @@ export default function FloatingBookingBar({ apt }: Props) {
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           className="fixed bottom-0 inset-x-0 z-50 lg:hidden"
         >
-          <div className="bg-white/95 backdrop-blur-md border-t border-gray-200 px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+          <div className="bg-white/95 backdrop-blur-md border-t border-gray-200 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
             <div className="flex items-center gap-3">
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-semibold text-ink truncate">

@@ -1,15 +1,16 @@
 'use client'
 
-import { useRef, useState, useCallback, useEffect } from 'react'
+import { useRef, useState, useCallback, useEffect, useMemo } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { X, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
+import { apartments } from '@/data/apartments'
 
 interface GalleryImage {
+  key: string
   src: string
-  altKey: string
   tagKey: string
   aptId: string
   aptName: string
@@ -17,20 +18,34 @@ interface GalleryImage {
   span: 'tall' | 'wide' | 'normal'
 }
 
-const imageData: GalleryImage[] = [
-  { src: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&q=80', altKey: 'img1Alt', tagKey: 'tagLiving', aptId: 'oslo-vest-hostel', aptName: 'Oslo Vest Hostel', location: 'Solli Plass', span: 'wide' },
-  { src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', altKey: 'img2Alt', tagKey: 'tagExterior', aptId: 'bygdoy-two-room', aptName: 'Two Room Apartment', location: 'Bygdøy', span: 'normal' },
-  { src: 'https://images.unsplash.com/photo-1630699144867-37acec97df5a?w=800&q=80', altKey: 'img3Alt', tagKey: 'tagBedroom', aptId: 'solli-studio', aptName: 'Studio Apartment', location: 'Solli', span: 'tall' },
-  { src: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80', altKey: 'img4Alt', tagKey: 'tagLiving', aptId: 'majorstuen-stylish', aptName: 'Stylish Apartment', location: 'Majorstuen', span: 'normal' },
-  { src: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80', altKey: 'img5Alt', tagKey: 'tagLiving', aptId: 'bygdoy-two-room', aptName: 'Two Room Apartment', location: 'Bygdøy', span: 'normal' },
-  { src: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80', altKey: 'img6Alt', tagKey: 'tagBathroom', aptId: 'frogner-studio', aptName: 'Studio Apartment', location: 'Frogner', span: 'wide' },
-  { src: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80', altKey: 'img7Alt', tagKey: 'tagLiving', aptId: 'bislett-two-room', aptName: 'Two Room Apartment', location: 'Bislett', span: 'tall' },
-  { src: 'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800&q=80', altKey: 'img8Alt', tagKey: 'tagKitchen', aptId: 'frogner-studio', aptName: 'Studio Apartment', location: 'Frogner', span: 'normal' },
-  { src: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&q=80', altKey: 'img9Alt', tagKey: 'tagBedroom', aptId: 'solli-studio', aptName: 'Studio Apartment', location: 'Solli', span: 'normal' },
-  { src: 'https://images.unsplash.com/photo-1536376072261-38c75010e6c9?w=800&q=80', altKey: 'img10Alt', tagKey: 'tagLiving', aptId: 'kiellands-two-room', aptName: 'Two Room Apartment', location: 'Kiellands Plass', span: 'normal' },
+const SPANS: Array<'tall' | 'wide' | 'normal'> = [
+  'wide', 'normal', 'tall', 'normal', 'wide', 'normal',
+  'tall', 'normal', 'wide', 'normal', 'tall', 'normal',
 ]
 
-const tagKeys = ['tagAll', 'tagLiving', 'tagBedroom', 'tagKitchen', 'tagBathroom', 'tagExterior'] as const
+const TAG_ROTATION = [
+  'tagLiving', 'tagBedroom', 'tagKitchen', 'tagLiving', 'tagBedroom',
+  'tagLiving', 'tagKitchen', 'tagBedroom', 'tagLiving', 'tagKitchen',
+  'tagLiving', 'tagBedroom',
+] as const
+
+const tagKeys = ['tagAll', 'tagLiving', 'tagBedroom', 'tagKitchen'] as const
+
+function buildGalleryImages(): GalleryImage[] {
+  return apartments.map((apt, i) => {
+    const imgs = apt.images.length ? apt.images : [apt.image]
+    const src = imgs[i % imgs.length]
+    return {
+      key: `${apt.id}-${src}`,
+      src,
+      tagKey: TAG_ROTATION[i % TAG_ROTATION.length],
+      aptId: apt.id,
+      aptName: apt.name,
+      location: apt.location,
+      span: SPANS[i % SPANS.length],
+    }
+  })
+}
 
 export default function PhotoGallery() {
   const t = useTranslations('PhotoGallery')
@@ -38,6 +53,8 @@ export default function PhotoGallery() {
   const inView = useInView(sectionRef, { once: true, margin: '-60px' })
   const [activeTagKey, setActiveTagKey] = useState<string>('tagAll')
   const [lightbox, setLightbox] = useState<number | null>(null)
+
+  const imageData = useMemo(() => buildGalleryImages(), [])
 
   const filtered = activeTagKey === 'tagAll'
     ? imageData
@@ -117,7 +134,7 @@ export default function PhotoGallery() {
 
               return (
                 <motion.div
-                  key={img.src}
+                  key={img.key}
                   layout
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -129,7 +146,7 @@ export default function PhotoGallery() {
                   <div className={`relative ${heightClass} rounded-2xl overflow-hidden`}>
                     <Image
                       src={img.src}
-                      alt={t(img.altKey)}
+                      alt={t('imageAlt', { name: img.aptName, location: img.location })}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -208,7 +225,10 @@ export default function PhotoGallery() {
             >
               <Image
                 src={filtered[lightbox].src}
-                alt={t(filtered[lightbox].altKey)}
+                alt={t('imageAlt', {
+                  name: filtered[lightbox].aptName,
+                  location: filtered[lightbox].location,
+                })}
                 fill
                 className="object-contain"
                 sizes="90vw"

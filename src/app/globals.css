@@ -27,6 +27,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Mobile: native date/time inputs readable on dark hero */
+.hero-date-input::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+.hero-date-input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.55;
+  cursor: pointer;
+}
+
 ::selection {
   background-color: var(--color-sage);
   color: white;

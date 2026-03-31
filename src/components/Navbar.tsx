@@ -28,13 +28,13 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        className={`fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] transition-all duration-500 ${
           scrolled
             ? 'bg-white/90 backdrop-blur-md shadow-sm'
             : ''
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-10 h-18">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 md:px-10 h-14 md:h-[4.5rem]">
           <a href="#" className="font-display text-xl tracking-wide">
             <span className={scrolled ? 'text-ink' : 'text-white'}>
               BA<span className="text-sage">5</span>
@@ -76,8 +76,10 @@ export default function Navbar() {
           <div className="flex md:hidden items-center gap-2">
             <LanguageSwitcher scrolled={scrolled} />
             <button
+              type="button"
               onClick={() => setOpen(!open)}
-              className={scrolled ? 'text-ink' : 'text-white'}
+              aria-label={open ? 'Close menu' : 'Open menu'}
+              className={`p-2 -mr-1 min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-lg ${scrolled ? 'text-ink' : 'text-white'}`}
             >
               {open ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -94,8 +96,10 @@ export default function Navbar() {
             className="fixed inset-0 z-40 bg-dark flex flex-col items-center justify-center gap-8"
           >
             <button
+              type="button"
               onClick={() => setOpen(false)}
-              className="absolute top-5 right-6 text-white"
+              aria-label="Close menu"
+              className="absolute top-[max(1rem,env(safe-area-inset-top))] right-4 sm:right-6 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-white"
             >
               <X size={24} />
             </button>

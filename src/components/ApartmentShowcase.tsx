@@ -105,7 +105,7 @@ export default function ApartmentShowcase() {
   ]
 
   return (
-    <section id="apartments" className="py-24 md:py-32 px-6 bg-sand">
+    <section id="apartments" className="py-20 md:py-32 px-4 sm:px-6 bg-sand">
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}
@@ -127,14 +127,15 @@ export default function ApartmentShowcase() {
           initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4, delay: 0.15 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10"
+          className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 mb-10 w-full"
         >
-          <div className="flex items-center gap-1.5 bg-white rounded-full p-1 shadow-sm border border-gray-100">
+          <div className="flex items-center justify-center sm:justify-start gap-1.5 bg-white rounded-full p-1 shadow-sm border border-gray-100 self-center sm:self-auto">
             {typeFilters.map(f => (
               <button
                 key={f.key}
+                type="button"
                 onClick={() => setTypeFilter(f.key)}
-                className={`text-xs font-medium px-4 py-2 rounded-full transition-all ${
+                className={`text-xs font-medium px-4 py-2.5 sm:py-2 min-h-[44px] sm:min-h-0 rounded-full transition-all ${
                   typeFilter === f.key
                     ? 'bg-dark text-white shadow-sm'
                     : 'text-ink-light hover:text-ink'
@@ -145,10 +146,11 @@ export default function ApartmentShowcase() {
             ))}
           </div>
 
-          <div className="flex items-center gap-1.5 bg-white rounded-full p-1 shadow-sm border border-gray-100">
+          <div className="flex items-center gap-1.5 bg-white rounded-full p-1 shadow-sm border border-gray-100 w-full sm:w-auto overflow-x-auto scrollbar-hide justify-start sm:justify-center flex-nowrap">
             <button
+              type="button"
               onClick={() => setAreaFilter('all')}
-              className={`text-xs font-medium px-4 py-2 rounded-full transition-all ${
+              className={`text-xs font-medium px-4 py-2.5 sm:py-2 shrink-0 rounded-full transition-all ${
                 areaFilter === 'all'
                   ? 'bg-dark text-white shadow-sm'
                   : 'text-ink-light hover:text-ink'
@@ -159,8 +161,9 @@ export default function ApartmentShowcase() {
             {areas.map(area => (
               <button
                 key={area}
+                type="button"
                 onClick={() => setAreaFilter(area)}
-                className={`text-xs font-medium px-4 py-2 rounded-full transition-all whitespace-nowrap ${
+                className={`text-xs font-medium px-4 py-2.5 sm:py-2 shrink-0 rounded-full transition-all whitespace-nowrap ${
                   areaFilter === area
                     ? 'bg-dark text-white shadow-sm'
                     : 'text-ink-light hover:text-ink'

@@ -32,17 +32,19 @@ export default function LanguageSwitcher({ scrolled = false }: Props) {
   return (
     <div className={`flex items-center rounded-full border ${borderClass} overflow-hidden transition-all`}>
       <button
+        type="button"
         onClick={() => switchTo('en')}
-        className={`text-[11px] font-semibold px-2.5 py-1 transition-all ${
+        className={`text-[11px] font-semibold px-3 py-2 sm:px-2.5 sm:py-1 min-h-[40px] sm:min-h-0 transition-all ${
           locale === 'en' ? activeClass : inactiveClass
         }`}
       >
         EN
       </button>
-      <div className={`w-px h-3.5 ${scrolled ? 'bg-gray-200' : 'bg-white/20'}`} />
+      <div className={`w-px h-4 my-auto ${scrolled ? 'bg-gray-200' : 'bg-white/20'}`} />
       <button
+        type="button"
         onClick={() => switchTo('no')}
-        className={`text-[11px] font-semibold px-2.5 py-1 transition-all ${
+        className={`text-[11px] font-semibold px-3 py-2 sm:px-2.5 sm:py-1 min-h-[40px] sm:min-h-0 transition-all ${
           locale === 'no' ? activeClass : inactiveClass
         }`}
       >

@@ -5,7 +5,6 @@ import Hero from '@/components/Hero'
 import About from '@/components/About'
 import Features from '@/components/Features'
 import Stats from '@/components/Stats'
-import WhyBA5 from '@/components/WhyBA5'
 import ApartmentShowcase from '@/components/ApartmentShowcase'
 import MapSection from '@/components/MapSection'
 import PhotoGallery from '@/components/PhotoGallery'
@@ -36,7 +35,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <About />
       <Features />
       <Stats />
-      <WhyBA5 />
       <ApartmentShowcase />
       <MapSection />
       <PhotoGallery />

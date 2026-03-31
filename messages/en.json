@@ -101,16 +101,7 @@
     "tagBathroom": "Bathroom",
     "tagExterior": "Exterior",
     "viewAll": "View all apartments",
-    "img1Alt": "Bright and airy living room with classic interior",
-    "img2Alt": "Modern facade with green surroundings",
-    "img3Alt": "Elegant bedroom with double bed",
-    "img4Alt": "Modern open living room with sofa",
-    "img5Alt": "Minimalist living room with natural light",
-    "img6Alt": "Luxurious bathroom with modern details",
-    "img7Alt": "Cozy living room with terrace access",
-    "img8Alt": "Compact and stylish kitchen",
-    "img9Alt": "Bright bedroom with a view",
-    "img10Alt": "Spacious living room with dining area"
+    "imageAlt": "Photo of {name}, {location}"
   },
   "Testimonials": {
     "label": "What our guests say",
@@ -237,22 +228,6 @@
   "NeighborhoodGuide": {
     "heading": "The neighborhood — {location}",
     "walkScore": "Walk Score: {score}"
-  },
-  "WhyBA5": {
-    "label": "Why BA5?",
-    "heading": "The best of both worlds",
-    "subtitle": "We combine the comfort and service of a hotel with the space and freedom of a private apartment.",
-    "feature": "Feature",
-    "hotel": "Hotel",
-    "fullKitchen": "Fully equipped kitchen",
-    "selfCheckIn": "Flexible self check-in",
-    "washer": "Washer & dryer",
-    "proClean": "Professional cleaning",
-    "localArea": "Authentic neighborhood feel",
-    "freeCancellation": "Free cancellation",
-    "privateSpace": "Your own private space",
-    "support247": "24/7 host support",
-    "disclaimer": "Comparison based on typical offerings. Actual amenities may vary by property."
   },
   "ImageGallery": {
     "mainImage": "{name} — main image",
