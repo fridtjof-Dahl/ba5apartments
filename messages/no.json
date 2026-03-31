@@ -70,9 +70,19 @@
   },
   "ApartmentShowcase": {
     "heading": "Bo på din måte",
-    "subtitle": "Enten du søker ro, sentral beliggenhet eller litt ekstra luksus — BA5 har den perfekte leiligheten for ditt opphold.",
+    "subtitle": "Enten du søker ro, sentral beliggenhet eller litt ekstra luksus — BA5 har det perfekte rommet for ditt opphold.",
     "viewAvailability": "Se tilgjengelighet",
-    "viewAll": "Se alle leiligheter"
+    "viewAll": "Se alle leiligheter",
+    "filterAll": "Alle",
+    "filterEntire": "Hele leiligheter",
+    "filterRoom": "Private rom",
+    "filterAllAreas": "Alle områder",
+    "badgeEntire": "Hel leilighet",
+    "badgeRoom": "Privat rom",
+    "badgeReviews": "anmeldelser",
+    "badgeGuests": "gjester",
+    "showing": "Viser {count} oppføringer",
+    "noResults": "Ingen oppføringer matcher filtrene dine. Prøv å justere valget."
   },
   "MapSection": {
     "label": "Våre lokasjoner",
@@ -253,6 +263,12 @@
   "HostawayWidget": {
     "bookNow": "Book nå",
     "clearDates": "Tøm datoer"
+  },
+  "CookieConsent": {
+    "title": "Vi bruker informasjonskapsler",
+    "text": "Vi bruker informasjonskapsler for å forbedre opplevelsen din og analysere trafikk. Ved å godta samtykker du til vår bruk av informasjonskapsler.",
+    "accept": "Godta alle",
+    "decline": "Kun nødvendige"
   },
   "LanguageSwitcher": {
     "en": "EN",

@@ -1,6 +1,9 @@
+export type ApartmentType = 'entire' | 'room'
+
 export interface Apartment {
   id: string
   name: string
+  type: ApartmentType
   location: string
   area: string
   size: string
@@ -13,6 +16,8 @@ export interface Apartment {
   hostawayListingId?: number
   bookingComUrl?: string
   airbnbUrl?: string
+  reviews?: number
+  superhost?: boolean
   coordinates: [number, number]
   neighborhood: {
     vibe: string
@@ -27,6 +32,8 @@ export const apartments: Apartment[] = [
   {
     id: 'frogner-deluxe',
     name: 'Deluxe Room — Frogner',
+    type: 'room',
+    reviews: 33,
     location: 'Frogner',
     area: 'Frogner',
     size: '18 sqm',
@@ -59,6 +66,8 @@ export const apartments: Apartment[] = [
   {
     id: 'frogner-deluxe-twin',
     name: 'Deluxe Twin Room — Frogner',
+    type: 'room',
+    reviews: 44,
     location: 'Frogner',
     area: 'Frogner',
     size: '20 sqm',
@@ -91,6 +100,8 @@ export const apartments: Apartment[] = [
   {
     id: 'frogner-king',
     name: 'King Room — Frogner',
+    type: 'room',
+    reviews: 48,
     location: 'Frogner',
     area: 'Frogner',
     size: '22 sqm',
@@ -123,6 +134,8 @@ export const apartments: Apartment[] = [
   {
     id: 'frogner-cozy',
     name: 'Cozy Room — Frogner',
+    type: 'room',
+    reviews: 9,
     location: 'Frogner',
     area: 'Frogner',
     size: '15 sqm',
@@ -157,6 +170,7 @@ export const apartments: Apartment[] = [
   {
     id: 'solli-deluxe',
     name: 'Deluxe Room — Solli Plass',
+    type: 'room',
     location: 'Solli Plass',
     area: 'Solli Plass',
     size: '18 sqm',
@@ -189,6 +203,8 @@ export const apartments: Apartment[] = [
   {
     id: 'solli-standard',
     name: 'Standard Room — Solli Plass',
+    type: 'room',
+    reviews: 1,
     location: 'Solli Plass',
     area: 'Solli Plass',
     size: '14 sqm',
@@ -221,6 +237,8 @@ export const apartments: Apartment[] = [
   {
     id: 'solli-superior',
     name: 'Superior Room — Solli Plass',
+    type: 'room',
+    reviews: 1,
     location: 'Solli Plass',
     area: 'Solli Plass',
     size: '20 sqm',
@@ -253,6 +271,7 @@ export const apartments: Apartment[] = [
   {
     id: 'solli-twin',
     name: 'Twin Room — Solli Plass',
+    type: 'room',
     location: 'Solli Plass',
     area: 'Solli Plass',
     size: '18 sqm',
@@ -287,6 +306,8 @@ export const apartments: Apartment[] = [
   {
     id: 'bygdoy-apartment',
     name: 'Two Room Apartment — Bygdøy',
+    type: 'entire',
+    reviews: 96,
     location: 'Bygdøy',
     area: 'Bygdøy',
     size: '55 sqm',
@@ -319,6 +340,9 @@ export const apartments: Apartment[] = [
   {
     id: 'frogner-studio',
     name: 'Studio Apartment — Frogner',
+    type: 'entire',
+    reviews: 164,
+    superhost: true,
     location: 'Frogner',
     area: 'Frogner',
     size: '25 sqm',
@@ -352,6 +376,7 @@ export const apartments: Apartment[] = [
   {
     id: 'majorstuen-apartment',
     name: 'Stylish Apartment — Majorstuen',
+    type: 'entire',
     location: 'Majorstuen',
     area: 'Majorstuen',
     size: '55 sqm',
@@ -384,6 +409,9 @@ export const apartments: Apartment[] = [
   {
     id: 'central-renovated',
     name: 'Newly Renovated Apartment — Central Oslo',
+    type: 'entire',
+    reviews: 27,
+    superhost: true,
     location: 'Central Oslo',
     area: 'Solli',
     size: '30 sqm',

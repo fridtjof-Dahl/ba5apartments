@@ -17,6 +17,7 @@ import Footer from '@/components/Footer'
 import ScrollProgress from '@/components/ScrollProgress'
 import PageLoader from '@/components/PageLoader'
 import BackToTop from '@/components/BackToTop'
+import CookieConsent from '@/components/CookieConsent'
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -45,6 +46,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <Contact />
       <Footer />
       <BackToTop />
+      <CookieConsent />
     </main>
   )
 }

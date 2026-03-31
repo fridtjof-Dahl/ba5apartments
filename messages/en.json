@@ -70,9 +70,19 @@
   },
   "ApartmentShowcase": {
     "heading": "Stay your way",
-    "subtitle": "Whether you seek tranquility, a central location, or a touch of luxury — BA5 has the perfect apartment for your stay.",
+    "subtitle": "Whether you seek tranquility, a central location, or a touch of luxury — BA5 has the perfect space for your stay.",
     "viewAvailability": "View availability",
-    "viewAll": "View all apartments"
+    "viewAll": "View all apartments",
+    "filterAll": "All",
+    "filterEntire": "Entire apartments",
+    "filterRoom": "Private rooms",
+    "filterAllAreas": "All areas",
+    "badgeEntire": "Entire apt",
+    "badgeRoom": "Private room",
+    "badgeReviews": "reviews",
+    "badgeGuests": "guests",
+    "showing": "Showing {count} listings",
+    "noResults": "No listings match your filters. Try adjusting your selection."
   },
   "MapSection": {
     "label": "Our locations",
@@ -253,6 +263,12 @@
   "HostawayWidget": {
     "bookNow": "Book now",
     "clearDates": "Clear dates"
+  },
+  "CookieConsent": {
+    "title": "We use cookies",
+    "text": "We use cookies to improve your experience and analyze site traffic. By accepting, you agree to our use of cookies.",
+    "accept": "Accept all",
+    "decline": "Necessary only"
   },
   "LanguageSwitcher": {
     "en": "EN",
