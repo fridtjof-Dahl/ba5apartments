@@ -25,13 +25,6 @@ export default function Footer() {
         { label: t('corporateDeals'), href: '#contact' },
       ],
     },
-    {
-      title: t('colSocial'),
-      links: [
-        { label: 'Instagram', href: 'https://www.instagram.com/' },
-        { label: 'Facebook', href: 'https://www.facebook.com/' },
-      ],
-    },
   ]
 
   return (
