@@ -1,12 +1,10 @@
 'use client'
 
-import { useState } from 'react'
 import { Award } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 export default function Footer() {
   const t = useTranslations('Footer')
-  const [email, setEmail] = useState('')
 
   const sitemap = [
     {
@@ -66,12 +64,11 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Booking partners */}
-        <div className="border-t border-white/10 pt-8 mb-8">
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-white/30 mb-4">
-            {t('colPartners')}
-          </p>
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-6">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-white/30">
+              {t('colPartners')}
+            </p>
             <a
               href="https://www.airbnb.com"
               target="_blank"
@@ -89,28 +86,6 @@ export default function Footer() {
               Booking.com
             </a>
           </div>
-        </div>
-
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          <form
-            onSubmit={e => { e.preventDefault(); setEmail('') }}
-            className="flex items-center gap-3 w-full md:w-auto"
-          >
-            <input
-              type="email"
-              placeholder={t('emailPlaceholder')}
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              required
-              className="bg-dark-card border border-white/10 rounded-full px-5 py-2.5 text-sm text-white placeholder-white/30 focus:border-sage focus:outline-none w-full md:w-64"
-            />
-            <button
-              type="submit"
-              className="btn-premium text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-colors flex-shrink-0"
-            >
-              {t('subscribe')}
-            </button>
-          </form>
 
           <p className="text-white/30 text-xs">
             {t('copyright', { year: new Date().getFullYear() })}
