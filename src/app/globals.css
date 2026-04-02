@@ -2,9 +2,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-sage: #4A6741;
-  --color-sage-light: #5C7D52;
-  --color-sage-dark: #3A5233;
+  --color-sage: #3B8A68;
+  --color-sage-light: #4DA37C;
+  --color-sage-dark: #2D7354;
   --color-sand: #F5F2ED;
   --color-sand-dark: #EBE7E1;
   --color-copper: #C4956A;
@@ -44,3 +44,33 @@ body {
 
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Premium CTA shimmer */
+@keyframes shimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+.btn-premium {
+  background: linear-gradient(
+    110deg,
+    var(--color-sage) 0%,
+    var(--color-sage) 35%,
+    var(--color-sage-light) 50%,
+    var(--color-sage) 65%,
+    var(--color-sage) 100%
+  );
+  background-size: 250% 100%;
+}
+.btn-premium:hover {
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* Feature card glow on hover */
+.feature-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(59, 138, 104, 0.12);
+  border-color: rgba(59, 138, 104, 0.25);
+}

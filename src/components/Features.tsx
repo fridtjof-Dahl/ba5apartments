@@ -21,8 +21,12 @@ export default function Features() {
   }))
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-dark text-white">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative py-24 md:py-32 px-6 bg-dark text-white overflow-hidden">
+      {/* Decorative background gradient */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-sage/[0.04] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-sage/[0.03] rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="relative max-w-7xl mx-auto">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
@@ -30,9 +34,10 @@ export default function Features() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.15] mb-5">
+          <span className="inline-block text-sage text-xs font-semibold uppercase tracking-[0.2em] mb-4">
             {t('heading1')}
-            <br className="hidden md:block" />
+          </span>
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.15] mb-5">
             {t('heading2')}
           </h2>
           <p className="text-white/50 max-w-xl mx-auto leading-relaxed">
@@ -47,9 +52,11 @@ export default function Features() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="bg-dark-card rounded-2xl p-6"
+              className="feature-card group bg-dark-card rounded-2xl p-6 border border-white/[0.06] cursor-default"
             >
-              <a.icon size={20} className="text-sage mb-4" strokeWidth={1.5} />
+              <div className="w-10 h-10 rounded-xl bg-sage/10 flex items-center justify-center mb-4 group-hover:bg-sage/20 transition-colors">
+                <a.icon size={20} className="text-sage" strokeWidth={1.5} />
+              </div>
               <h3 className="font-semibold text-sm mb-1.5">{a.title}</h3>
               <p className="text-white/50 text-sm leading-relaxed">{a.desc}</p>
             </motion.div>
@@ -60,7 +67,7 @@ export default function Features() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="bg-dark-card rounded-2xl p-8 md:p-10"
+          className="bg-dark-card rounded-2xl p-8 md:p-10 border border-white/[0.06]"
         >
           <p className="font-display text-xl md:text-2xl italic leading-relaxed mb-6 max-w-2xl">
             &ldquo;{featured.text}&rdquo;

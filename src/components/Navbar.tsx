@@ -57,19 +57,13 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-4">
             <LanguageSwitcher scrolled={scrolled} />
             <a
               href="#booking"
-              className={`inline-flex items-center gap-2 text-[13px] font-semibold px-6 py-2.5 rounded-full transition-all ${
-                scrolled
-                  ? 'bg-dark text-white hover:bg-dark/80'
-                  : 'bg-white text-ink hover:bg-white/90'
-              }`}
+              className="btn-premium inline-flex items-center gap-2 text-[13px] font-semibold px-7 py-2.5 rounded-full text-white shadow-lg shadow-sage/30 hover:shadow-xl hover:shadow-sage/40 transition-shadow"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40" />
               {t('bookCta')}
-              <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40" />
             </a>
           </div>
 
@@ -117,11 +111,9 @@ export default function Navbar() {
             <a
               href="#booking"
               onClick={() => setOpen(false)}
-              className="mt-6 inline-flex items-center gap-2 bg-white text-ink px-8 py-3 rounded-full text-sm font-semibold"
+              className="btn-premium mt-6 inline-flex items-center gap-2 text-white px-8 py-3 rounded-full text-sm font-semibold shadow-lg shadow-sage/30"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-ink/40" />
               {t('bookCta')}
-              <span className="w-1.5 h-1.5 rounded-full bg-ink/40" />
             </a>
           </motion.div>
         )}

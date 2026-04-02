@@ -34,9 +34,9 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-[100dvh] min-h-screen bg-gradient-to-b from-dark via-dark/95 to-sand overflow-hidden">
-      <div className="absolute inset-0 bg-[url('/images/hero2.avif')] bg-cover bg-center opacity-30" />
+      <div className="absolute inset-0 bg-[url('/images/hero2.avif')] bg-cover bg-center opacity-30 pointer-events-none" />
 
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-[100dvh] min-h-screen px-4 sm:px-6 pt-[calc(3.5rem+env(safe-area-inset-top)+1.25rem)] pb-[max(2rem,env(safe-area-inset-bottom))] md:pt-[calc(4.5rem+env(safe-area-inset-top)+1rem)] md:pb-12 text-center">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-[100dvh] min-h-screen px-4 sm:px-6 pt-[calc(3.5rem+env(safe-area-inset-top)+1.25rem)] pb-[max(2rem,env(safe-area-inset-bottom))] md:pt-[calc(4.5rem+env(safe-area-inset-top)+1rem)] md:pb-12 text-center select-none cursor-default">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -64,7 +64,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.65 }}
           className="mt-6 sm:mt-10 md:mt-14 w-full max-w-3xl"
         >
-          <form onSubmit={handleSearch}>
+          <form onSubmit={handleSearch} className="select-auto">
             <div className="bg-white/[0.08] backdrop-blur-2xl rounded-2xl md:rounded-full p-3 sm:p-3.5 md:p-2 border border-white/[0.14] shadow-2xl shadow-black/25">
               <div className="flex flex-col gap-3 md:gap-0 md:flex-row md:items-stretch">
                 {/* Dates: side-by-side on mobile, row on desktop */}
@@ -132,7 +132,7 @@ export default function Hero() {
                 {/* Search CTA */}
                 <button
                   type="submit"
-                  className="w-full md:w-auto md:self-center shrink-0 bg-sage hover:bg-sage-light active:scale-[0.98] text-white px-6 md:px-8 min-h-[48px] md:min-h-0 py-3.5 md:py-3 rounded-xl md:rounded-full text-[15px] md:text-sm font-semibold transition-all flex items-center justify-center gap-2 md:mx-1 shadow-lg shadow-sage/25"
+                  className="btn-premium w-full md:w-auto md:self-center shrink-0 text-white px-6 md:px-8 min-h-[48px] md:min-h-0 py-3.5 md:py-3 rounded-xl md:rounded-full text-[15px] md:text-sm font-semibold transition-all flex items-center justify-center gap-2 md:mx-1 shadow-lg shadow-sage/30 hover:shadow-xl hover:shadow-sage/40 active:scale-[0.98]"
                 >
                   <Search size={17} className="md:w-[15px] md:h-[15px]" />
                   {t('bookSearch')}
