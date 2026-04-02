@@ -188,9 +188,11 @@
     "bookStay": "Book stay",
     "corporateDeals": "Corporate deals",
     "colSocial": "Social media",
+    "colPartners": "Book through",
     "emailPlaceholder": "Your email",
     "subscribe": "Subscribe",
-    "copyright": "© {year} BA5 Apartments. All rights reserved."
+    "copyright": "© {year} BA5 Apartments. All rights reserved.",
+    "superhostNote": "Airbnb Superhost — trusted by hundreds of guests"
   },
   "ApartmentPage": {
     "allApartments": "All apartments",

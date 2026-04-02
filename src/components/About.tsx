@@ -19,7 +19,7 @@ export default function About() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-sm font-medium text-ink-light tracking-wide mb-4">
+            <p className="text-sm font-medium text-sage tracking-wide mb-4">
               {t('label')}
             </p>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-ink leading-[1.15] mb-6">
@@ -33,11 +33,9 @@ export default function About() {
             </p>
             <a
               href="#apartments"
-              className="inline-flex items-center gap-2.5 bg-dark text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-dark/80 transition-all"
+              className="btn-premium inline-flex items-center gap-2 text-white px-7 py-3.5 rounded-full text-sm font-semibold shadow-lg shadow-sage/25 hover:shadow-xl hover:shadow-sage/35 transition-shadow"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
               {t('cta')}
-              <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
             </a>
           </motion.div>
 
@@ -51,7 +49,7 @@ export default function About() {
               <div className="space-y-4">
                 <div className="rounded-3xl overflow-hidden aspect-[3/4]">
                   <img
-                    src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80"
+                    src="/images/apartments/frogner-studio-1.jpg"
                     alt={t('imgAlt1')}
                     className="w-full h-full object-cover"
                   />
@@ -60,7 +58,7 @@ export default function About() {
               <div className="space-y-4 pt-8">
                 <div className="rounded-3xl overflow-hidden aspect-[3/4]">
                   <img
-                    src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80"
+                    src="/images/apartments/bygdoy-apartment-2.jpg"
                     alt={t('imgAlt2')}
                     className="w-full h-full object-cover"
                   />

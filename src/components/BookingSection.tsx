@@ -205,7 +205,7 @@ export default function BookingSection() {
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="w-full flex items-center justify-center gap-2 bg-white text-ink py-3.5 rounded-xl text-sm font-semibold hover:bg-white/90 transition-colors disabled:opacity-60"
+                  className="btn-premium w-full flex items-center justify-center gap-2 text-white py-3.5 rounded-xl text-sm font-semibold shadow-lg shadow-sage/25 hover:shadow-xl hover:shadow-sage/35 transition-shadow disabled:opacity-60"
                 >
                   {status === 'loading' ? (
                     <><Loader2 size={14} className="animate-spin" /> {t('submitting')}</>

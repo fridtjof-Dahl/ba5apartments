@@ -223,7 +223,7 @@ export default function ApartmentPage({ apt, others }: Props) {
                     )}
 
                     <button type="submit" disabled={status === 'loading'}
-                      className="w-full flex items-center justify-center gap-2 bg-sage text-white py-3.5 rounded-xl text-sm font-semibold hover:bg-sage-light transition-colors disabled:opacity-60">
+                      className="btn-premium w-full flex items-center justify-center gap-2 text-white py-3.5 rounded-xl text-sm font-semibold shadow-lg shadow-sage/25 hover:shadow-xl hover:shadow-sage/35 transition-shadow disabled:opacity-60">
                       {status === 'loading' ? <><Loader2 size={14} className="animate-spin" />{t('submitting')}</> : t('submit')}
                     </button>
                     <p className="text-center text-ink-faint text-xs mt-3">{t('cancellationNote')}</p>

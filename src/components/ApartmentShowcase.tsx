@@ -2,7 +2,7 @@
 
 import { useRef, useState, useMemo } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { ArrowRight, Star, Award, Home, DoorOpen } from 'lucide-react'
+import { ArrowRight, Star, Award, Home, DoorOpen, MapPin } from 'lucide-react'
 import { apartments } from '@/data/apartments'
 import type { ApartmentType } from '@/data/apartments'
 import { useTranslations } from 'next-intl'
@@ -30,13 +30,14 @@ function Card({ apt, i, viewLabel, t }: { apt: (typeof apartments)[0]; i: number
     >
       <Link
         href={`/apartments/${apt.id}`}
-        className="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+        className="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:shadow-sage/8 transition-all duration-300 hover:-translate-y-1"
       >
         <div className="relative aspect-[4/3] overflow-hidden">
           <div
-            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
             style={{ backgroundImage: `url('${apt.image}')` }}
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           {apt.type === 'entire' ? (
             <Badge className="bg-sage/90 text-white">
               <span className="flex items-center gap-1"><Home size={10} />{t('badgeEntire')}</span>
@@ -47,12 +48,12 @@ function Card({ apt, i, viewLabel, t }: { apt: (typeof apartments)[0]; i: number
             </Badge>
           )}
           {apt.superhost && (
-            <span className="absolute top-3 right-3 z-10 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-400/90 text-amber-950 backdrop-blur-md flex items-center gap-1">
+            <span className="absolute top-3 right-3 z-10 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-sage/90 text-white backdrop-blur-md flex items-center gap-1 shadow-md shadow-sage/20">
               <Award size={10} />Superhost
             </span>
           )}
           {apt.reviews && apt.reviews > 10 && (
-            <span className="absolute bottom-3 left-3 z-10 text-[10px] font-semibold px-2 py-1 rounded-full bg-white/90 text-ink backdrop-blur-md flex items-center gap-1">
+            <span className="absolute bottom-3 left-3 z-10 text-[10px] font-semibold px-2.5 py-1 rounded-full bg-white/95 text-ink backdrop-blur-md flex items-center gap-1 shadow-sm">
               <Star size={10} className="text-amber-500 fill-amber-500" />
               {apt.reviews} {t('badgeReviews')}
             </span>
@@ -60,14 +61,17 @@ function Card({ apt, i, viewLabel, t }: { apt: (typeof apartments)[0]; i: number
         </div>
 
         <div className="p-5">
-          <h3 className="font-display text-lg text-ink mb-1">{apt.name}</h3>
-          <p className="text-sage text-xs font-medium mb-2.5">
+          <div className="flex items-start justify-between gap-2 mb-1">
+            <h3 className="font-display text-lg text-ink">{apt.name}</h3>
+          </div>
+          <p className="text-sage text-xs font-medium mb-3 flex items-center gap-1.5">
+            <MapPin size={11} className="flex-shrink-0" />
             {apt.location} · {apt.size} · {apt.guests} {t('badgeGuests')}
           </p>
           <p className="text-ink-light text-sm leading-relaxed mb-4 line-clamp-2">
             {apt.description}
           </p>
-          <span className="inline-flex items-center gap-1.5 text-ink text-sm font-medium group-hover:gap-2.5 transition-all">
+          <span className="inline-flex items-center gap-1.5 text-sage text-sm font-medium group-hover:gap-2.5 transition-all">
             {viewLabel}
             <ArrowRight size={14} />
           </span>

@@ -75,7 +75,7 @@ export default function FloatingBookingBar({ apt }: Props) {
                 ) : (
                   <a
                     href="#booking-form"
-                    className="bg-sage text-white text-xs font-semibold px-5 py-2.5 rounded-full"
+                    className="btn-premium text-white text-xs font-semibold px-5 py-2.5 rounded-full shadow-md shadow-sage/20"
                   >
                     {t('bookNow')}
                   </a>

@@ -12,7 +12,7 @@ export default function NotFound() {
       </p>
       <Link
         href="/"
-        className="inline-flex items-center gap-2 bg-sage text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-sage-light transition-colors"
+        className="btn-premium inline-flex items-center gap-2 text-white px-7 py-3.5 rounded-full text-sm font-semibold shadow-lg shadow-sage/25 hover:shadow-xl hover:shadow-sage/35 transition-shadow"
       >
         Back to BA5 Apartments
       </Link>

@@ -188,9 +188,11 @@
     "bookStay": "Book opphold",
     "corporateDeals": "Bedriftsavtaler",
     "colSocial": "Sosiale medier",
+    "colPartners": "Book via",
     "emailPlaceholder": "Din e-post",
     "subscribe": "Abonner",
-    "copyright": "© {year} BA5 Apartments. Alle rettigheter reservert."
+    "copyright": "© {year} BA5 Apartments. Alle rettigheter reservert.",
+    "superhostNote": "Airbnb Superhost — anbefalt av hundrevis av gjester"
   },
   "ApartmentPage": {
     "allApartments": "Alle leiligheter",

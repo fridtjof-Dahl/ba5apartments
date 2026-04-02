@@ -54,8 +54,10 @@ export default function Stats() {
   ]
 
   return (
-    <section className="py-20 md:py-28 px-6">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative py-20 md:py-28 px-6 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-sand/50 to-white pointer-events-none" />
+
+      <div className="relative max-w-7xl mx-auto">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
@@ -63,7 +65,7 @@ export default function Stats() {
           transition={{ duration: 0.5 }}
           className="text-center mb-14"
         >
-          <p className="text-sm font-medium text-ink-light tracking-wide mb-4">
+          <p className="text-sm font-medium text-sage tracking-wide mb-4">
             {t('label')}
           </p>
           <h3 className="font-display text-xl md:text-2xl text-ink max-w-xl mx-auto leading-relaxed">
@@ -85,6 +87,7 @@ export default function Stats() {
                 <p className="font-display text-5xl md:text-6xl text-ink mb-2">
                   <AnimatedNumber value={num} suffix={suffix} inView={inView} />
                 </p>
+                <div className="w-8 h-0.5 bg-sage/40 rounded-full mx-auto mb-3" />
                 <p className="text-ink-light text-sm">{s.label}</p>
               </motion.div>
             )
