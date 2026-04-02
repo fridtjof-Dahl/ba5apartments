@@ -108,21 +108,21 @@ export default function Contact() {
 
                 <div className="space-y-4 mb-6">
                   <div>
-                    <label className="block text-xs font-medium text-ink-light mb-1.5">{t('labelName')}</label>
-                    <input type="text" required value={form.name} onChange={e => set('name', e.target.value)} className={inputCls} />
+                    <label htmlFor="contact-name" className="block text-xs font-medium text-ink-light mb-1.5">{t('labelName')}</label>
+                    <input id="contact-name" type="text" required value={form.name} onChange={e => set('name', e.target.value)} className={inputCls} />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-ink-light mb-1.5">{t('labelEmail')}</label>
-                    <input type="email" required value={form.email} onChange={e => set('email', e.target.value)} className={inputCls} />
+                    <label htmlFor="contact-email" className="block text-xs font-medium text-ink-light mb-1.5">{t('labelEmail')}</label>
+                    <input id="contact-email" type="email" required value={form.email} onChange={e => set('email', e.target.value)} className={inputCls} />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-ink-light mb-1.5">{t('labelMessage')}</label>
-                    <textarea required rows={4} value={form.message} onChange={e => set('message', e.target.value)} className={`${inputCls} resize-none`} />
+                    <label htmlFor="contact-message" className="block text-xs font-medium text-ink-light mb-1.5">{t('labelMessage')}</label>
+                    <textarea id="contact-message" required rows={4} value={form.message} onChange={e => set('message', e.target.value)} className={`${inputCls} resize-none`} />
                   </div>
                 </div>
 
                 {status === 'error' && (
-                  <p className="text-sm text-red-500 mb-4">{t('errorText')}</p>
+                  <p role="alert" className="text-sm text-red-500 mb-4">{t('errorText')}</p>
                 )}
 
                 <button

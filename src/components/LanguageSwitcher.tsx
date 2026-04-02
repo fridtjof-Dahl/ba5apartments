@@ -25,22 +25,26 @@ export default function LanguageSwitcher({ scrolled = false }: Props) {
   const iconClass = scrolled ? 'text-ink-light' : 'text-white/50'
 
   return (
-    <div className="flex items-center gap-1.5">
-      <Globe size={14} className={`${iconClass} flex-shrink-0`} strokeWidth={1.5} />
+    <div role="group" aria-label="Language" className="flex items-center gap-1.5">
+      <Globe size={14} className={`${iconClass} flex-shrink-0`} strokeWidth={1.5} aria-hidden="true" />
       <button
         type="button"
         onClick={() => switchTo('en')}
-        className={`text-[11px] font-medium tracking-wide px-0.5 py-1 min-h-[40px] sm:min-h-0 transition-colors ${
+        aria-label="Switch to English"
+        aria-current={locale === 'en' ? 'true' : undefined}
+        className={`text-[11px] font-medium tracking-wide px-1 py-1.5 min-h-[44px] sm:min-h-0 rounded transition-colors ${
           locale === 'en' ? activeClass : inactiveClass
         }`}
       >
         EN
       </button>
-      <span className={`text-[10px] ${scrolled ? 'text-ink-faint/40' : 'text-white/20'}`}>/</span>
+      <span className={`text-[10px] select-none ${scrolled ? 'text-ink-faint/40' : 'text-white/20'}`} aria-hidden="true">/</span>
       <button
         type="button"
         onClick={() => switchTo('no')}
-        className={`text-[11px] font-medium tracking-wide px-0.5 py-1 min-h-[40px] sm:min-h-0 transition-colors ${
+        aria-label="Bytt til norsk"
+        aria-current={locale === 'no' ? 'true' : undefined}
+        className={`text-[11px] font-medium tracking-wide px-1 py-1.5 min-h-[44px] sm:min-h-0 rounded transition-colors ${
           locale === 'no' ? activeClass : inactiveClass
         }`}
       >

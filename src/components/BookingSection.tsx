@@ -158,38 +158,38 @@ export default function BookingSection() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
-                    <label className="block text-xs font-medium text-white/40 mb-1.5">{t('labelName')}</label>
-                    <input type="text" required value={form.name} onChange={e => set('name', e.target.value)} className={inputCls} placeholder={t('placeholderName')} />
+                    <label htmlFor="booking-name" className="block text-xs font-medium text-white/50 mb-1.5">{t('labelName')}</label>
+                    <input id="booking-name" type="text" required value={form.name} onChange={e => set('name', e.target.value)} className={inputCls} placeholder={t('placeholderName')} />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-white/40 mb-1.5">{t('labelEmail')}</label>
-                    <input type="email" required value={form.email} onChange={e => set('email', e.target.value)} className={inputCls} placeholder={t('placeholderEmail')} />
+                    <label htmlFor="booking-email" className="block text-xs font-medium text-white/50 mb-1.5">{t('labelEmail')}</label>
+                    <input id="booking-email" type="email" required value={form.email} onChange={e => set('email', e.target.value)} className={inputCls} placeholder={t('placeholderEmail')} />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
-                    <label className="block text-xs font-medium text-white/40 mb-1.5">{t('labelCheckIn')}</label>
-                    <input type="date" required value={form.checkIn} onChange={e => set('checkIn', e.target.value)} className={inputCls} min={new Date().toISOString().split('T')[0]} />
+                    <label htmlFor="booking-checkin" className="block text-xs font-medium text-white/50 mb-1.5">{t('labelCheckIn')}</label>
+                    <input id="booking-checkin" type="date" required value={form.checkIn} onChange={e => set('checkIn', e.target.value)} className={inputCls} min={new Date().toISOString().split('T')[0]} />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-white/40 mb-1.5">{t('labelCheckOut')}</label>
-                    <input type="date" required value={form.checkOut} onChange={e => set('checkOut', e.target.value)} className={inputCls} min={form.checkIn || new Date().toISOString().split('T')[0]} />
+                    <label htmlFor="booking-checkout" className="block text-xs font-medium text-white/50 mb-1.5">{t('labelCheckOut')}</label>
+                    <input id="booking-checkout" type="date" required value={form.checkOut} onChange={e => set('checkOut', e.target.value)} className={inputCls} min={form.checkIn || new Date().toISOString().split('T')[0]} />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                   <div>
-                    <label className="block text-xs font-medium text-white/40 mb-1.5">{t('labelGuests')}</label>
-                    <select value={form.guests} onChange={e => set('guests', e.target.value)} className={inputCls}>
+                    <label htmlFor="booking-guests" className="block text-xs font-medium text-white/50 mb-1.5">{t('labelGuests')}</label>
+                    <select id="booking-guests" value={form.guests} onChange={e => set('guests', e.target.value)} className={inputCls}>
                       {[1, 2, 3, 4].map(n => (
                         <option key={n} value={n}>{t('guest', { count: n })}</option>
                       ))}
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-white/40 mb-1.5">{t('labelApartment')}</label>
-                    <select value={form.apartment} onChange={e => set('apartment', e.target.value)} className={inputCls}>
+                    <label htmlFor="booking-apartment" className="block text-xs font-medium text-white/50 mb-1.5">{t('labelApartment')}</label>
+                    <select id="booking-apartment" value={form.apartment} onChange={e => set('apartment', e.target.value)} className={inputCls}>
                       <option value="">{t('allApartments')}</option>
                       {apartments.map(a => (
                         <option key={a.id} value={a.id}>{a.name} — {a.location}</option>
@@ -199,7 +199,7 @@ export default function BookingSection() {
                 </div>
 
                 {status === 'error' && (
-                  <p className="text-sm text-red-400 mb-4">{t('errorText')}</p>
+                  <p role="alert" className="text-sm text-red-400 mb-4">{t('errorText')}</p>
                 )}
 
                 <button

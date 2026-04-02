@@ -52,7 +52,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.45 }}
-          className="mt-4 sm:mt-6 text-white/60 max-w-lg text-sm sm:text-[15px] md:text-base leading-relaxed px-1"
+          className="mt-4 sm:mt-6 text-white/80 max-w-lg text-sm sm:text-[15px] md:text-base leading-relaxed px-1"
         >
           {t('subtitle')}
         </motion.p>
@@ -152,9 +152,9 @@ export default function Hero() {
           {trustBadges.map(badge => (
             <div
               key={badge}
-              className="flex items-center gap-1.5 text-white/40 text-[11px] sm:text-xs"
+              className="flex items-center gap-1.5 text-white/70 text-[11px] sm:text-xs"
             >
-              <Check size={12} className="text-sage/80 flex-shrink-0" />
+              <Check size={12} className="text-sage flex-shrink-0" aria-hidden="true" />
               <span className="text-left leading-snug">{badge}</span>
             </div>
           ))}

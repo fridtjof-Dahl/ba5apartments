@@ -5,23 +5,34 @@ import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Plus, Minus } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-function FaqItem({ q, a, isOpen, toggle }: { q: string; a: string; isOpen: boolean; toggle: () => void }) {
+function FaqItem({ q, a, isOpen, toggle, id }: { q: string; a: string; isOpen: boolean; toggle: () => void; id: number }) {
+  const headingId = `faq-q-${id}`
+  const panelId = `faq-a-${id}`
+
   return (
     <div className="border-b border-gray-100 last:border-b-0">
-      <button
-        onClick={toggle}
-        className="w-full flex items-start justify-between py-5 text-left group"
-      >
-        <span className="font-medium text-ink text-[15px] pr-8 group-hover:text-sage transition-colors">
-          {q}
-        </span>
-        <span className="mt-0.5 text-ink-faint group-hover:text-sage transition-colors flex-shrink-0">
-          {isOpen ? <Minus size={18} /> : <Plus size={18} />}
-        </span>
-      </button>
+      <h3>
+        <button
+          onClick={toggle}
+          aria-expanded={isOpen}
+          aria-controls={panelId}
+          id={headingId}
+          className="w-full flex items-start justify-between py-5 text-left group"
+        >
+          <span className="font-medium text-ink text-[15px] pr-8 group-hover:text-sage transition-colors">
+            {q}
+          </span>
+          <span className="mt-0.5 text-ink-faint group-hover:text-sage transition-colors flex-shrink-0" aria-hidden="true">
+            {isOpen ? <Minus size={18} /> : <Plus size={18} />}
+          </span>
+        </button>
+      </h3>
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
+            id={panelId}
+            role="region"
+            aria-labelledby={headingId}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -86,6 +97,7 @@ export default function FAQ() {
             {faqs.map((faq, i) => (
               <FaqItem
                 key={i}
+                id={i}
                 q={faq.q}
                 a={faq.a}
                 isOpen={openIndex === i}

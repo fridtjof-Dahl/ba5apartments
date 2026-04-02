@@ -27,7 +27,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   setRequestLocale(locale)
 
   return (
-    <main>
+    <main id="main-content">
       <PageLoader />
       <ScrollProgress />
       <Navbar />
