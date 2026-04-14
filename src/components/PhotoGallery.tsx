@@ -11,7 +11,6 @@ import { apartments } from '@/data/apartments'
 interface GalleryImage {
   key: string
   src: string
-  tagKey: string
   aptId: string
   aptName: string
   location: string
@@ -23,14 +22,6 @@ const SPANS: Array<'tall' | 'wide' | 'normal'> = [
   'tall', 'normal', 'wide', 'normal', 'tall', 'normal',
 ]
 
-const TAG_ROTATION = [
-  'tagLiving', 'tagBedroom', 'tagKitchen', 'tagLiving', 'tagBedroom',
-  'tagLiving', 'tagKitchen', 'tagBedroom', 'tagLiving', 'tagKitchen',
-  'tagLiving', 'tagBedroom',
-] as const
-
-const tagKeys = ['tagAll', 'tagLiving', 'tagBedroom', 'tagKitchen'] as const
-
 function buildGalleryImages(): GalleryImage[] {
   return apartments.map((apt, i) => {
     const imgs = apt.images.length ? apt.images : [apt.image]
@@ -38,7 +29,6 @@ function buildGalleryImages(): GalleryImage[] {
     return {
       key: `${apt.id}-${src}`,
       src,
-      tagKey: TAG_ROTATION[i % TAG_ROTATION.length],
       aptId: apt.id,
       aptName: apt.name,
       location: apt.location,
@@ -51,21 +41,16 @@ export default function PhotoGallery() {
   const t = useTranslations('PhotoGallery')
   const sectionRef = useRef<HTMLDivElement>(null)
   const inView = useInView(sectionRef, { once: true, margin: '-60px' })
-  const [activeTagKey, setActiveTagKey] = useState<string>('tagAll')
   const [lightbox, setLightbox] = useState<number | null>(null)
 
-  const imageData = useMemo(() => buildGalleryImages(), [])
-
-  const filtered = activeTagKey === 'tagAll'
-    ? imageData
-    : imageData.filter(img => img.tagKey === activeTagKey)
+  const images = useMemo(() => buildGalleryImages(), [])
 
   const navigate = useCallback(
     (dir: 1 | -1) => {
       if (lightbox === null) return
-      setLightbox((lightbox + dir + filtered.length) % filtered.length)
+      setLightbox((lightbox + dir + images.length) % images.length)
     },
-    [lightbox, filtered.length],
+    [lightbox, images.length],
   )
 
   useEffect(() => {
@@ -97,24 +82,6 @@ export default function PhotoGallery() {
               {t('heading')}
             </h2>
           </div>
-          <div className="flex flex-wrap gap-2 mt-4 md:mt-0">
-            {tagKeys.map(key => (
-              <button
-                key={key}
-                onClick={() => {
-                  setActiveTagKey(key)
-                  setLightbox(null)
-                }}
-                className={`text-xs px-4 py-2 rounded-full border transition-all ${
-                  activeTagKey === key
-                    ? 'bg-dark text-white border-dark'
-                    : 'bg-white text-ink-light border-gray-200 hover:border-dark hover:text-ink'
-                }`}
-              >
-                {t(key)}
-              </button>
-            ))}
-          </div>
         </motion.div>
 
         <motion.div
@@ -124,7 +91,7 @@ export default function PhotoGallery() {
           className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4"
         >
           <AnimatePresence mode="popLayout">
-            {filtered.map((img, i) => {
+            {images.map((img, i) => {
               const heightClass =
                 img.span === 'tall'
                   ? 'aspect-[3/4]'
@@ -152,11 +119,6 @@ export default function PhotoGallery() {
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute top-3 left-3">
-                      <span className="bg-white/90 backdrop-blur-sm text-ink text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full">
-                        {t(img.tagKey)}
-                      </span>
-                    </div>
                     <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                       <p className="text-white font-display text-lg">{img.aptName}</p>
                       <p className="text-white/70 text-xs">{img.location}</p>
@@ -185,7 +147,7 @@ export default function PhotoGallery() {
       </div>
 
       <AnimatePresence>
-        {lightbox !== null && filtered[lightbox] && (
+        {lightbox !== null && images[lightbox] && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -224,10 +186,10 @@ export default function PhotoGallery() {
               onClick={e => e.stopPropagation()}
             >
               <Image
-                src={filtered[lightbox].src}
+                src={images[lightbox].src}
                 alt={t('imageAlt', {
-                  name: filtered[lightbox].aptName,
-                  location: filtered[lightbox].location,
+                  name: images[lightbox].aptName,
+                  location: images[lightbox].location,
                 })}
                 fill
                 className="object-contain"
@@ -237,17 +199,17 @@ export default function PhotoGallery() {
 
             <div className="absolute bottom-8 left-0 right-0 text-center">
               <Link
-                href={`/apartments/${filtered[lightbox].aptId}`}
+                href={`/apartments/${images[lightbox].aptId}`}
                 onClick={e => e.stopPropagation()}
                 className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white text-sm px-5 py-2.5 rounded-full hover:bg-white/20 transition-colors"
               >
-                {filtered[lightbox].aptName} — {filtered[lightbox].location}
+                {images[lightbox].aptName} — {images[lightbox].location}
                 <ArrowRight size={14} />
               </Link>
             </div>
 
             <div className="absolute bottom-20 left-0 right-0 flex justify-center gap-1.5">
-              {filtered.map((_, i) => (
+              {images.map((_, i) => (
                 <button
                   key={i}
                   onClick={e => { e.stopPropagation(); setLightbox(i) }}

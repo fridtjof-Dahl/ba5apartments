@@ -53,7 +53,7 @@ export const apartments: Apartment[] = [
     bookingComUrl:
       'https://www.booking.com/hotel/no/oslo-vest-hostel.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/1120844328872172996',
-    coordinates: [59.9212, 10.7055],
+    coordinates: [59.9157, 10.7166],
     neighborhood: {
       vibe: 'Oslo\'s most prestigious neighborhood — elegance and tranquility',
       walkScore: 95,
@@ -90,7 +90,7 @@ export const apartments: Apartment[] = [
     bookingComUrl:
       'https://www.booking.com/hotel/no/oslo-vest-hostel.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/1128471679055477602',
-    coordinates: [59.9214, 10.7048],
+    coordinates: [59.9157, 10.7166],
     neighborhood: {
       vibe: 'Oslo\'s most prestigious neighborhood — elegance and tranquility',
       walkScore: 95,
@@ -127,7 +127,7 @@ export const apartments: Apartment[] = [
     bookingComUrl:
       'https://www.booking.com/hotel/no/oslo-vest-hostel.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/1128255688957410984',
-    coordinates: [59.9210, 10.7060],
+    coordinates: [59.9157, 10.7166],
     neighborhood: {
       vibe: 'Oslo\'s most prestigious neighborhood — elegance and tranquility',
       walkScore: 95,
@@ -164,7 +164,7 @@ export const apartments: Apartment[] = [
     bookingComUrl:
       'https://www.booking.com/hotel/no/oslo-vest-hostel.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/1128482433296477360',
-    coordinates: [59.9208, 10.7052],
+    coordinates: [59.9157, 10.7166],
     neighborhood: {
       vibe: 'Oslo\'s most prestigious neighborhood — elegance and tranquility',
       walkScore: 95,
@@ -201,7 +201,7 @@ export const apartments: Apartment[] = [
     bookingUrl: '/booking',
     bookingComUrl: 'https://www.booking.com/hotel/no/oslo-living.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/1608802267894604295',
-    coordinates: [59.9175, 10.7225],
+    coordinates: [59.9157, 10.7166],
     neighborhood: {
       vibe: 'Elegant and central with tree-lined streets and upscale dining',
       walkScore: 96,
@@ -237,7 +237,7 @@ export const apartments: Apartment[] = [
     bookingUrl: '/booking',
     bookingComUrl: 'https://www.booking.com/hotel/no/oslo-living.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/1618930459639956189',
-    coordinates: [59.9178, 10.7228],
+    coordinates: [59.9157, 10.7166],
     neighborhood: {
       vibe: 'Elegant and central with tree-lined streets and upscale dining',
       walkScore: 96,
@@ -273,7 +273,7 @@ export const apartments: Apartment[] = [
     bookingUrl: '/booking',
     bookingComUrl: 'https://www.booking.com/hotel/no/oslo-living.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/1618928837680777693',
-    coordinates: [59.9173, 10.7222],
+    coordinates: [59.9157, 10.7166],
     neighborhood: {
       vibe: 'Elegant and central with tree-lined streets and upscale dining',
       walkScore: 96,
@@ -308,7 +308,7 @@ export const apartments: Apartment[] = [
     bookingUrl: '/booking',
     bookingComUrl: 'https://www.booking.com/hotel/no/oslo-living.html',
     airbnbUrl: 'https://www.airbnb.no/rooms/1608860070415458572',
-    coordinates: [59.9176, 10.7220],
+    coordinates: [59.9157, 10.7166],
     neighborhood: {
       vibe: 'Elegant and central with tree-lined streets and upscale dining',
       walkScore: 96,
@@ -347,7 +347,7 @@ export const apartments: Apartment[] = [
     bookingComUrl:
       'https://www.booking.com/hotel/no/apartment-on-idyllic-bygdoy-with-free-parking.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/703426062508620510',
-    coordinates: [59.9060, 10.6830],
+    coordinates: [59.9005, 10.6904],
     neighborhood: {
       vibe: 'The museum peninsula — peaceful, green, and culturally rich',
       walkScore: 72,
@@ -384,7 +384,7 @@ export const apartments: Apartment[] = [
     bookingComUrl:
       'https://www.booking.com/hotel/no/studio-apartment-in-central-oslo.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/769496684949345924',
-    coordinates: [59.9210, 10.7050],
+    coordinates: [59.9157, 10.7166],
     neighborhood: {
       vibe: 'Oslo\'s most prestigious neighborhood — elegance and tranquility',
       walkScore: 95,
@@ -420,7 +420,7 @@ export const apartments: Apartment[] = [
     bookingComUrl:
       'https://www.booking.com/hotel/no/elegant-apartment-with-a-central-location-in-oslo.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/1293443667533494630',
-    coordinates: [59.9295, 10.7145],
+    coordinates: [59.9157, 10.7166],
     neighborhood: {
       vibe: 'Trendy shopping district with excellent public transport',
       walkScore: 97,
@@ -457,7 +457,7 @@ export const apartments: Apartment[] = [
     bookingComUrl:
       'https://www.booking.com/hotel/no/stylish-newly-renovated-apartment-in-central-oslo.html',
     airbnbUrl: 'https://www.airbnb.se/rooms/1505110456312265614',
-    coordinates: [59.9175, 10.7230],
+    coordinates: [59.9323, 10.7432],
     neighborhood: {
       vibe: 'Urban and sophisticated — cafés, galleries, and city life',
       walkScore: 98,
